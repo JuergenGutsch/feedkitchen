@@ -49,8 +49,7 @@ Is buying (fetches) the ingredients (source feed) on a regular basis
 * Waiter
   * Server
 * Spices
-  * Monetarization 
-
+  * Monetarization and stuff
 
 ## Docker Compose
 (not yet completely configured)
@@ -70,3 +69,4 @@ ME_CONFIG_MONGODB_ADMINPASSWORD=yourtopsecretpassword
 ```
 
 after that you can run `docker-compose up` to run the application
+=======
