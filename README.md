@@ -11,9 +11,9 @@ A feedburner alternative based on C# and Azure
   * User
 * Menu
   * Target feed
-* Ingrdiences
+* Ingredients
   * Source feed
 * To cook
   * Building the target feed
 * Spices
-  * Monetarization 
+  * Monetarization and stuff
