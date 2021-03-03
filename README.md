@@ -50,3 +50,23 @@ Is buying (fetches) the ingredients (source feed) on a regular basis
   * Server
 * Spices
   * Monetarization 
+
+
+## Docker Compose
+(not yet completely configured)
+
+To run docker compose you need to add a `.env` file to the docker folder.
+
+Currently this files contains the following variables:
+
+``` env
+# mongo
+MONGO_INITDB_ROOT_USERNAME=youruser
+MONGO_INITDB_ROOT_PASSWORD=yourtopsecretpassword
+
+# mongo-express
+ME_CONFIG_MONGODB_ADMINUSERNAME=youruser
+ME_CONFIG_MONGODB_ADMINPASSWORD=yourtopsecretpassword
+```
+
+after that you can run `docker-compose up` to run the application
