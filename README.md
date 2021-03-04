@@ -69,4 +69,4 @@ ME_CONFIG_MONGODB_ADMINPASSWORD=yourtopsecretpassword
 ```
 
 after that you can run `docker-compose up` to run the application
-=======
+
