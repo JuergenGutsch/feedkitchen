@@ -21,7 +21,7 @@ services:
     build:
       context: ../src/FeedKitchen.ChefPortal/
     ports:
-      - "5003:5001"
+      - "5002:5002"
     depends_on:
       - mongo
   cookportal:
@@ -29,7 +29,7 @@ services:
     build:
       context: ../src/FeedKitchen.CookPortal/
     ports:
-      - "5002:5001"
+      - "5003:5003"
     depends_on:
       - mongo
   ingredientsbuyer:
