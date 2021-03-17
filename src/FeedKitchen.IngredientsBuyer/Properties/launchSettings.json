@@ -1,11 +1,15 @@
-﻿{
+{
   "profiles": {
     "FeedKitchen.IngredientsBuyer": {
       "commandName": "Project",
-      "dotnetRunMessages": "true",
       "environmentVariables": {
-        "DOTNET_ENVIRONMENT": "Development"
-      }
+        "DOTNET_ENVIRONMENT": "Development",
+        "MONGODB_PASSWORD": "UQArHQaxMG7RG76i",
+        "MONGODB_USERNAME": "feedkitchen",
+        "MONGODB_DATABASE": "FeedKitchen",
+        "MONGODB_SERVER": "feedkitchen.ecsxo.mongodb.net"
+      },
+      "dotnetRunMessages": "true"
     }
   }
 }
