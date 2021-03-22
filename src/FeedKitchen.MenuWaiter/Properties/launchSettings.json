@@ -14,7 +14,11 @@
       "launchBrowser": true,
       "launchUrl": "swagger",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "MONGODB_PASSWORD": "UQArHQaxMG7RG76i",
+        "MONGODB_USERNAME": "feedkitchen",
+        "MONGODB_DATABASE": "FeedKitchen",
+        "MONGODB_SERVER": "feedkitchen.ecsxo.mongodb.net"
       }
     },
     "FeedKitchen.MenuWaiter": {
@@ -22,9 +26,13 @@
       "dotnetRunMessages": "true",
       "launchBrowser": true,
       "launchUrl": "swagger",
-      "applicationUrl": "https://+:5001",
+      "applicationUrl": "https://localhost:5001",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "MONGODB_PASSWORD": "UQArHQaxMG7RG76i",
+        "MONGODB_USERNAME": "feedkitchen",
+        "MONGODB_DATABASE": "FeedKitchen",
+        "MONGODB_SERVER": "feedkitchen.ecsxo.mongodb.net"
       }
     }
   }
