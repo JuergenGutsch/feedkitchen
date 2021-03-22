@@ -10,6 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\FeedKitchen.Repositories\FeedKitchen.Repositories.csproj" />
     <ProjectReference Include="..\FeedKitchen.Shared\FeedKitchen.Shared.csproj" />
   </ItemGroup>
 

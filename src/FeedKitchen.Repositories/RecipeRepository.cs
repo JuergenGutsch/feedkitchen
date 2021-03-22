@@ -25,7 +25,12 @@ namespace FeedKitchen.Repositories
 
         public async Task<Recipe> Load(string name)
         {
-            throw new NotImplementedException();
+            var mongoRecipes = Database.GetCollection<Recipe>("Recipes");
+            var recipe =  mongoRecipes.AsQueryable()
+                .Where(x => x.Title == name)
+                .FirstOrDefault();
+
+            return recipe;
         }
 
         public async Task<IEnumerable<Recipe>> LoadActiveRecipes()

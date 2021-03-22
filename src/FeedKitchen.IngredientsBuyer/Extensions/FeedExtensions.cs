@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using CodeHollow.FeedReader;
+using CodeHollow.FeedReader.Feeds;
 using FeedKitchen.Shared.Models;
 
 namespace FeedKitchen.IngredientsBuyer.Extensions
@@ -21,13 +22,17 @@ namespace FeedKitchen.IngredientsBuyer.Extensions
 
         public static Ingredient Convert(this FeedItem item)
         {
-            return new Ingredient(
-                item.Title,
-                item.Link,
-                item.Author,
-                item.Categories,
-                item.PublishingDate,
-                item.Content);
+            return new Ingredient
+            {
+                Id = item.Id,
+                Title = item.Title,
+                Link = item.Link,
+                Author = item.Author,
+                Categories = item.Categories,
+                PublishingDate = item.PublishingDate,
+                Content = item.Content,
+                Summary = item.Description
+            };
         }
     }
 }

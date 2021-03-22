@@ -1,6 +1,9 @@
+using FeedKitchen.Repositories;
+using FeedKitchen.Shared.Options;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Formatters;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -25,13 +28,32 @@ namespace FeedKitchen.MenuWaiter
                 .AddMvcOptions(options =>
                 {
                     options.OutputFormatters.Add(new Rss2OutputFormatter());
-                    options.OutputFormatters.Add(new Atom1OutputFormatter());
+                    options.FormatterMappings.SetMediaTypeMappingForFormat(
+                        "rss2", MediaTypeHeaderValue.Parse("application/rss+xml"));
 
+                    options.OutputFormatters.Add(new Atom1OutputFormatter());
                     options.FormatterMappings.SetMediaTypeMappingForFormat(
-                        "rss2", MediaTypeHeaderValue.Parse("text/rss"));
-                    options.FormatterMappings.SetMediaTypeMappingForFormat(
-                        "atom1", MediaTypeHeaderValue.Parse("text/atom"));
-                }); 
+                        "atom1", MediaTypeHeaderValue.Parse("application/atom+xml"));
+                });
+
+            services.Configure<KestrelServerOptions>(options =>
+            {
+                options.AllowSynchronousIO = true;
+            });
+            services.Configure<MongoOptions>(c =>
+            {
+                c.MONGO_INITDB_ROOT_USERNAME = Configuration.GetValue<string>("MONGO_INITDB_ROOT_USERNAME");
+                c.MONGO_INITDB_ROOT_PASSWORD = Configuration.GetValue<string>("MONGO_INITDB_ROOT_PASSWORD");
+                c.ME_CONFIG_MONGODB_ADMINUSERNAME = Configuration.GetValue<string>("ME_CONFIG_MONGODB_ADMINUSERNAME");
+                c.ME_CONFIG_MONGODB_ADMINPASSWORD = Configuration.GetValue<string>("ME_CONFIG_MONGODB_ADMINPASSWORD");
+
+                c.MONGODB_USERNAME = Configuration.GetValue<string>("MONGODB_USERNAME");
+                c.MONGODB_PASSWORD = Configuration.GetValue<string>("MONGODB_PASSWORD");
+                c.MONGODB_SERVER = Configuration.GetValue<string>("MONGODB_SERVER");
+                c.MONGODB_DATABASE = Configuration.GetValue<string>("MONGODB_DATABASE");
+            });
+            services.AddSingleton<RecipeRepository>();
+
 
             services.AddSwaggerGen(c =>
             {
