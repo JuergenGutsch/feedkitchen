@@ -3,7 +3,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using FeedKitchen.IngredientsBuyer.Extensions;
 using FeedKitchen.Repositories;
-using FeedKitchen.Shared.Models;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 

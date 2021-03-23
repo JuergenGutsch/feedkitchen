@@ -1,8 +1,8 @@
+using FeedKitchen.MenuWaiter.OutputFormatters;
 using FeedKitchen.Repositories;
 using FeedKitchen.Shared.Options;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
