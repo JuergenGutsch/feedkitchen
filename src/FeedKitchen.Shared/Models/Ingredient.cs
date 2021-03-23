@@ -6,9 +6,10 @@ namespace FeedKitchen.Shared.Models
     public class Ingredient
     {
         public string Id { get; set; }
+        public string IngridientId { get; set; }
         public string Title { get; set; }
-        public string Link { get; set; }
-        public string KitchenUri { get; set; }
+        public Uri Link { get; set; }
+        public Uri KitchenUri { get; set; }
         public string Author { get; set; }
         public ICollection<string> Categories { get; set; } = new string[] { };
         public DateTime? PublishingDate { get; set; }

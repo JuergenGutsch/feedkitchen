@@ -27,7 +27,7 @@ namespace FeedKitchen.Repositories
         {
             var mongoRecipes = Database.GetCollection<Recipe>("Recipes");
             var recipe =  mongoRecipes.AsQueryable()
-                .Where(x => x.Title == name)
+                .Where(x => x.RecipeId == name)
                 .FirstOrDefault();
 
             return recipe;

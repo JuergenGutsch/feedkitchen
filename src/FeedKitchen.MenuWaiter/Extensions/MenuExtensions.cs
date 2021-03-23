@@ -18,12 +18,12 @@ namespace FeedKitchen.MenuWaiter.Extensions
 
             feed.Items = menu.Ingredients.Select(x =>
             {
-                var kitschenUri = !string.IsNullOrWhiteSpace(x.KitchenUri) ? new Uri(x.KitchenUri) : new Uri(x.Link);
+                var kitschenUri = x.KitchenUri is not null ? x.KitchenUri : x.Link;
                 var pubDate = new DateTimeOffset(x.PublishingDate ?? DateTime.Now);
 
-                var syndicationItem = new SyndicationItem(x.Title, x.Content, kitschenUri, x.Link, pubDate)
+                var syndicationItem = new SyndicationItem(x.Title, x.Content, kitschenUri, x.Link.ToString(), pubDate)
                 {
-                    Id = x.Id,
+                    Id = x.IngridientId,
                     Summary = new TextSyndicationContent(x.Summary, TextSyndicationContentKind.Plaintext),
                     PublishDate = pubDate
                 };

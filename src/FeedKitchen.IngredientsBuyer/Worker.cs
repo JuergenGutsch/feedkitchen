@@ -3,6 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using FeedKitchen.IngredientsBuyer.Extensions;
 using FeedKitchen.Repositories;
+using FeedKitchen.Shared.Models;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
@@ -28,19 +29,20 @@ namespace FeedKitchen.IngredientsBuyer
         {
             while (!stoppingToken.IsCancellationRequested)
             {
-                //var r = new Recipe
-                //{
-                //    Url = new Uri("http://asp.net-hacker.rocks/atom.xml"),
-                //    LastUpdate = DateTime.Now.AddYears(-2),
-                //    Title = "ASP.NET Hacker",
-                //    Description = "My blog about ASP.NET, .NET, C# and community",
-                //    Author = new Author
-                //    {
-                //        Email = "juergen@gutsch-online.de",
-                //        Name = "Jürgen Gutsch"
-                //    }
-                //};
-                //await _recipeRepository.AddRecipe(r);
+                var newRecipe = new Recipe
+                {
+                    Url = new Uri("http://asp.net-hacker.rocks/atom.xml"),
+                    LastUpdate = DateTime.Now.AddYears(-2),
+                    Title = "ASP.NET Hacker",
+                    RecipeId = "aspnethacker",
+                    Description = "My blog about ASP.NET, .NET, C# and community",
+                    Author = new Author
+                    {
+                        Email = "juergen@gutsch-online.de",
+                        Name = "Jürgen Gutsch"
+                    }
+                };
+                await _recipeRepository.AddRecipe(newRecipe);
 
 
                 _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
