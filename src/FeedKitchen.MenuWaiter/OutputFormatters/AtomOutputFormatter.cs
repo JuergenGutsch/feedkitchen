@@ -5,15 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 
-namespace FeedKitchen.MenuWaiter
+namespace FeedKitchen.MenuWaiter.OutputFormatters
 {
-
-    public class Rss2OutputFormatter : BaseOutputFormatter
+    public class Atom1OutputFormatter : BaseOutputFormatter
     {
-        public Rss2OutputFormatter() : 
-            base("application/rss+xml")
-        {
-        }
+        public Atom1OutputFormatter()
+            : base("application/atom+xml")
+        { }
 
         public override async Task WriteResponseBodyAsync(
             OutputFormatterWriteContext context,
@@ -26,7 +24,7 @@ namespace FeedKitchen.MenuWaiter
             using (var xmlWriter = XmlWriter.Create(response.Body))
             {
                 var feed = menu.Serve();
-                feed.SaveAsRss20(xmlWriter);
+                feed.SaveAsAtom10(xmlWriter);
             }
         }
     }

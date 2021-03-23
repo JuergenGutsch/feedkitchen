@@ -1,4 +1,5 @@
-﻿using FeedKitchen.Shared.Models;
+﻿using FeedKitchen.Shared.Extensions;
+using FeedKitchen.Shared.Models;
 using System.Linq;
 
 namespace FeedKitchen.MenuWaiter.Extensions
@@ -18,10 +19,9 @@ namespace FeedKitchen.MenuWaiter.Extensions
 
             var ingredients = recipe.Ingredients
                 .OrderByDescending(x => x.PublishingDate)
-                .Take(20)
-                .Select(x => x);
-            foreach (var ingredient in ingredients)
-                menu.Ingredients.Add(ingredient);
+                .Take(20);
+
+            ingredients.ForEach(x => menu.Ingredients.Add(x));
 
             return menu;
         }
