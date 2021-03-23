@@ -25,7 +25,7 @@ namespace FeedKitchen.MenuWaiter.Controllers
         [HttpGet("{name}")]
         public async Task<ActionResult<object>> Serve(string name)
         {
-            _logger.LogInformation($"Serve {name}");
+            _logger.LogInformation($"Serve '{name}'");
 
             var recipe = await _repository.Load(name);
 

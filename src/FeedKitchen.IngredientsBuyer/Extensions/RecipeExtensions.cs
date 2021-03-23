@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using CodeHollow.FeedReader;
 using FeedKitchen.Shared.Extensions;
@@ -31,6 +32,12 @@ namespace FeedKitchen.IngredientsBuyer.Extensions
                 .Where(x => x.PublishingDate >= recipe.LastUpdate)
                 .ForEach(x =>
                 {
+                    var linkItems = x.Link.Segments;
+                    var lpathItem = linkItems[linkItems.Length - 1];
+                    var kitchenUrl = $"https://localhost:5001/Item/{recipe.RecipeId}/{x.Id}/{lpathItem}";
+
+                    x.KitchenUri = new Uri(kitchenUrl);
+
                     recipe.Ingredients.Add(x);
                     i++;
                 });

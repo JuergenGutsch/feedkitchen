@@ -9,6 +9,7 @@ namespace FeedKitchen.Shared.Models
     {
         [BsonId]
         public ObjectId Id { get; set; }
+        public string RecipeId { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public DateTime? LastUpdate { get; set; }
