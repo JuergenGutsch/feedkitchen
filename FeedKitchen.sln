@@ -36,9 +36,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".shared", ".shared", "{2484
 		.gitignore = .gitignore
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FeedKitchen.Shared", "src\FeedKitchen.Shared\FeedKitchen.Shared.csproj", "{0F77FB1E-8A59-44E9-A095-4BBD4D9B82AA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FeedKitchen.Shared", "src\FeedKitchen.Shared\FeedKitchen.Shared.csproj", "{0F77FB1E-8A59-44E9-A095-4BBD4D9B82AA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FeedKitchen.Repositories", "src\FeedKitchen.Repositories\FeedKitchen.Repositories.csproj", "{EAF4EB97-3FD2-4454-B741-35780917E3AE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FeedKitchen.Repositories", "src\FeedKitchen.Repositories\FeedKitchen.Repositories.csproj", "{EAF4EB97-3FD2-4454-B741-35780917E3AE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FeedKitchen.Doorman", "src\FeedKitchen.Doorman\FeedKitchen.Doorman.csproj", "{F79438D7-115C-4672-8867-66BAD24D57F9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -182,6 +184,18 @@ Global
 		{EAF4EB97-3FD2-4454-B741-35780917E3AE}.Release|x64.Build.0 = Release|Any CPU
 		{EAF4EB97-3FD2-4454-B741-35780917E3AE}.Release|x86.ActiveCfg = Release|Any CPU
 		{EAF4EB97-3FD2-4454-B741-35780917E3AE}.Release|x86.Build.0 = Release|Any CPU
+		{F79438D7-115C-4672-8867-66BAD24D57F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F79438D7-115C-4672-8867-66BAD24D57F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F79438D7-115C-4672-8867-66BAD24D57F9}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{F79438D7-115C-4672-8867-66BAD24D57F9}.Debug|x64.Build.0 = Debug|Any CPU
+		{F79438D7-115C-4672-8867-66BAD24D57F9}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F79438D7-115C-4672-8867-66BAD24D57F9}.Debug|x86.Build.0 = Debug|Any CPU
+		{F79438D7-115C-4672-8867-66BAD24D57F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F79438D7-115C-4672-8867-66BAD24D57F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F79438D7-115C-4672-8867-66BAD24D57F9}.Release|x64.ActiveCfg = Release|Any CPU
+		{F79438D7-115C-4672-8867-66BAD24D57F9}.Release|x64.Build.0 = Release|Any CPU
+		{F79438D7-115C-4672-8867-66BAD24D57F9}.Release|x86.ActiveCfg = Release|Any CPU
+		{F79438D7-115C-4672-8867-66BAD24D57F9}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -198,6 +212,7 @@ Global
 		{5E5C1BED-E884-4D39-BD61-1A260E68C776} = {ABFB55D8-E2CD-4BC4-8651-69AC923892C2}
 		{0F77FB1E-8A59-44E9-A095-4BBD4D9B82AA} = {C15ADA74-C8F5-4558-8925-ABC07F233B16}
 		{EAF4EB97-3FD2-4454-B741-35780917E3AE} = {C15ADA74-C8F5-4558-8925-ABC07F233B16}
+		{F79438D7-115C-4672-8867-66BAD24D57F9} = {C15ADA74-C8F5-4558-8925-ABC07F233B16}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5B022EB5-A161-4197-AE5C-9759AECEB686}

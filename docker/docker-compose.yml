@@ -16,6 +16,14 @@ services:
       - ME_CONFIG_MONGODB_ADMINPASSWORD
     depends_on:
       - mongo
+  doorman:
+    image: feedkitchen/doorman
+    build:
+      context: ../src/FeedKitchen.Doorman/
+    ports:
+      - "5000:5000"
+    depends_on:
+      - mongo
   chefportal:
     image: feedkitchen/chefportal
     build:
@@ -24,6 +32,7 @@ services:
       - "5002:5002"
     depends_on:
       - mongo
+      - doorman
   cookportal:
     image: feedkitchen/cookportal
     build:
@@ -32,6 +41,7 @@ services:
       - "5003:5003"
     depends_on:
       - mongo
+      - doorman
   ingredientsbuyer:
     image: feedkitchen/ingredientsbuyer
     build:

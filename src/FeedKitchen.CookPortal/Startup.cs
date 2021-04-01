@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -23,6 +25,27 @@ namespace FeedKitchen.CookPortal
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAuthentication(options =>
+            {
+                options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
+            })
+            .AddCookie()
+            .AddOpenIdConnect(options =>
+            {
+                options.SignInScheme = "Cookies";
+                options.Authority = "https://localhost:5000";
+                options.RequireHttpsMetadata = true;
+                options.ClientId = "cookportal_client";
+                options.ClientSecret = "cookportal_client_secret";
+                options.ResponseType = "code";
+                options.UsePkce = true;
+                options.Scope.Add("profile");
+                options.Scope.Add("offline_access");
+                options.SaveTokens = true;
+            });
+
+            services.AddAuthorization();
             services.AddRazorPages();
         }
 
@@ -45,6 +68,7 @@ namespace FeedKitchen.CookPortal
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
