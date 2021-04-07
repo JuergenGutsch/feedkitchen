@@ -8,6 +8,11 @@ namespace FeedKitchen.MenuWaiter.Extensions
     {
         public static Menu Cook(this Recipe recipe)
         {
+            if (recipe is null)
+            {
+                return new Menu();
+            }
+
             var menu = new Menu
             {
                 Author = recipe.Author,

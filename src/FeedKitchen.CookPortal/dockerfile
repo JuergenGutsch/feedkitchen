@@ -1,12 +1,13 @@
+FROM mcr.microsoft.com/dotnet/sdk:6.0-focal as builder
+ADD ../FeedKitchen.Repositories /FeedKitchen.Repositories
+ADD ../FeedKitchen.Shared /FeedKitchen.Shared
+ADD ../FeedKitchen.CookPortal /FeedKitchen.CookPortal
+RUN ["dotnet", "publish", "-o", "/build", "./FeedKitchen.CookPortal"]
+
+
 FROM mcr.microsoft.com/dotnet/sdk:6.0-focal
-
-ADD . /app
-
+COPY --from=builder /build /app
 WORKDIR /app
-
 EXPOSE 5003 5003
-
 ENV ASPNETCORE_URLS=https://+:5003
-
-
-ENTRYPOINT ["dotnet", "run"]
+ENTRYPOINT ["dotnet", "FeedKitchen.CookPortal.dll"]

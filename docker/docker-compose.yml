@@ -19,7 +19,8 @@ services:
   doorman:
     image: feedkitchen/doorman
     build:
-      context: ../src/FeedKitchen.Doorman/
+      context: ../src/
+      dockerfile: FeedKitchen.Doorman/dockerfile
     ports:
       - "5000:5000"
     depends_on:
@@ -27,32 +28,56 @@ services:
   chefportal:
     image: feedkitchen/chefportal
     build:
-      context: ../src/FeedKitchen.ChefPortal/
+      context: ../src/
+      dockerfile: FeedKitchen.ChefPortal/dockerfile
     ports:
       - "5002:5002"
     depends_on:
       - mongo
       - doorman
+    environment:
+      - MONGODB_USERNAME
+      - MONGODB_PASSWORD
+      - MONGODB_SERVER
+      - MONGODB_DATABASE
   cookportal:
     image: feedkitchen/cookportal
     build:
-      context: ../src/FeedKitchen.CookPortal/
+      context: ../src/
+      dockerfile: FeedKitchen.CookPortal/dockerfile
     ports:
       - "5003:5003"
     depends_on:
       - mongo
       - doorman
+    environment:
+      - MONGODB_USERNAME
+      - MONGODB_PASSWORD
+      - MONGODB_SERVER
+      - MONGODB_DATABASE
   ingredientsbuyer:
     image: feedkitchen/ingredientsbuyer
     build:
-      context: ../src/FeedKitchen.IngredientsBuyer/
+      context: ../src/
+      dockerfile: FeedKitchen.IngredientsBuyer/dockerfile
     depends_on:
       - mongo
+    environment:
+      - MONGODB_USERNAME
+      - MONGODB_PASSWORD
+      - MONGODB_SERVER
+      - MONGODB_DATABASE
   menuwaiter:
     image: feedkitchen/menuwaiter
     build:
-      context: ../src/FeedKitchen.MenuWaiter/
+      context: ../src/
+      dockerfile: FeedKitchen.MenuWaiter/dockerfile
     ports:
       - "5001:5001"
     depends_on:
       - mongo
+    environment:
+      - MONGODB_USERNAME
+      - MONGODB_PASSWORD
+      - MONGODB_SERVER
+      - MONGODB_DATABASE
