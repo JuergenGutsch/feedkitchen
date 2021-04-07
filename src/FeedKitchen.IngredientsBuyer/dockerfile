@@ -1,7 +1,11 @@
+FROM mcr.microsoft.com/dotnet/sdk:6.0-focal as builder
+ADD ../FeedKitchen.Repositories /FeedKitchen.Repositories
+ADD ../FeedKitchen.Shared /FeedKitchen.Shared
+ADD ../FeedKitchen.IngredientsBuyer /FeedKitchen.IngredientsBuyer
+RUN ["dotnet", "publish", "-o", "/build", "./FeedKitchen.IngredientsBuyer"]
+
+
 FROM mcr.microsoft.com/dotnet/sdk:6.0-focal
-
-ADD . /app
-
+COPY --from=builder /build /app
 WORKDIR /app
-
-ENTRYPOINT ["dotnet", "run"]
+ENTRYPOINT ["dotnet", "FeedKitchen.IngredientsBuyer.dll"]
