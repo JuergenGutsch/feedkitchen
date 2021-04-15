@@ -1,7 +1,8 @@
-using System.Threading.Tasks;
 using FeedKitchen.Shared.Options;
 using Microsoft.Extensions.Options;
+using Microsoft.Extensions.Logging;
 using MongoDB.Driver;
+
 
 namespace FeedKitchen.Repositories
 {
@@ -9,9 +10,12 @@ namespace FeedKitchen.Repositories
     {
         private IMongoDatabase _database;
 
-        protected RepositoryBase(IOptions<MongoOptions> mongoOptions)
+        protected RepositoryBase(
+            IOptions<MongoOptions> mongoOptions,
+            ILogger logger)
         {
             MongoOptions = mongoOptions.Value;
+            _logger = logger;
         }
 
         public IMongoDatabase Database
@@ -24,6 +28,8 @@ namespace FeedKitchen.Repositories
 
         public MongoOptions MongoOptions { get; }
 
+        private readonly ILogger _logger;
+
         public IMongoDatabase GetOrCreateCbClient()
         {
             if (_database == null)
@@ -32,10 +38,10 @@ namespace FeedKitchen.Repositories
                 var password = MongoOptions.MONGODB_PASSWORD;
                 var server = MongoOptions.MONGODB_SERVER;
                 var database = MongoOptions.MONGODB_DATABASE;
-                var connectionString = $"mongodb+srv://{username}:{password}@{server}/test?retryWrites=true&w=majority";
+                var connectionString = $"mongodb+srv://{username}:{password}@{server}/{database}?retryWrites=true&w=majority";
+                _logger.LogInformation(connectionString);
                 var client = new MongoClient(connectionString);
                 _database = client.GetDatabase(database);
-
             }
             return _database;
         }
