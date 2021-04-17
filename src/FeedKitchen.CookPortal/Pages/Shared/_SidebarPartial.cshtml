@@ -1,0 +1,39 @@
+﻿<nav id="sidebar" class="position-sticky">
+    <div class="sidebar-header">
+        <span id="sidebarCollapse" title="Toggle Sidebar">
+            <i class="bi bi-list"></i>
+        </span>
+    </div>
+
+    <ul class="list-unstyled components">
+        <p>Dummy Heading</p>
+        <li class="active">
+            <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
+            <ul class="collapse list-unstyled" id="homeSubmenu">
+                <li>
+                    <a asp-area="" asp-page="/Index">Home</a>
+                </li>
+                <li>
+                    <a href="#">Stats</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Recipes</a>
+            <ul class="collapse list-unstyled" id="pageSubmenu">
+                <li>
+                    <a href="#">Recipes</a>
+                </li>
+                <li>
+                    <a href="#">New Recipe</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="#">Logs</a>
+        </li>
+        <li>
+            <a asp-area="" asp-page="/Privacy">Privacy</a>
+        </li>
+    </ul>
+</nav>
