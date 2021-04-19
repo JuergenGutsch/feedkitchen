@@ -15,6 +15,7 @@ namespace FeedKitchen.MenuWaiter.Extensions
 
             var menu = new Menu
             {
+                Id = recipe.Id,
                 Author = recipe.Author,
                 Title = recipe.Title,
                 Description = recipe.Description,

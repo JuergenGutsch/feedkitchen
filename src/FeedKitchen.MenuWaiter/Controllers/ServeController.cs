@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using FeedKitchen.Shared.Models;
 using FeedKitchen.MenuWaiter.Extensions;
 using FeedKitchen.Repositories;
 using System.Threading.Tasks;
@@ -10,7 +9,7 @@ namespace FeedKitchen.MenuWaiter.Controllers
     [ApiController]
     [Route("[controller]")]
     public class ServeController : ControllerBase
-    {       
+    {
         private readonly ILogger<ServeController> _logger;
         private readonly RecipeRepository _repository;
 

@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using DnsClient.Internal;
 using Microsoft.Extensions.Logging;
+using MongoDB.Bson;
 
 namespace FeedKitchen.Repositories
 {
@@ -32,11 +33,22 @@ namespace FeedKitchen.Repositories
             var result = await mongoRecipes.ReplaceOneAsync(filter, recipe);
         }
 
+        public async Task<Recipe> Load(ObjectId recipeId)
+        {
+            _logger.LogDebug("Load", recipeId);
+            var mongoRecipes = Database.GetCollection<Recipe>("Recipes");
+            var recipe =  mongoRecipes.AsQueryable()
+                .Where(x => x.Id == recipeId)
+                .FirstOrDefault();
+
+            return recipe;
+        }
+
         public async Task<Recipe> Load(string name)
         {
             _logger.LogDebug("Load", name);
             var mongoRecipes = Database.GetCollection<Recipe>("Recipes");
-            var recipe =  mongoRecipes.AsQueryable()
+            var recipe = mongoRecipes.AsQueryable()
                 .Where(x => x.RecipeId == name)
                 .FirstOrDefault();
 

@@ -1,5 +1,6 @@
 ﻿using FeedKitchen.Shared.Extensions;
 using FeedKitchen.Shared.Models;
+using MongoDB.Bson;
 using System;
 using System.Linq;
 using System.ServiceModel.Syndication;
@@ -18,10 +19,11 @@ namespace FeedKitchen.MenuWaiter.Extensions
 
             feed.Items = menu.Ingredients.Select(x =>
             {
-                var kitschenUri = x.KitchenUri is not null ? x.KitchenUri : x.Link;
+                var kitchenUri = x.SetKitchenUrl(menu.Id);
+                var link = x.Link.ToString();
                 var pubDate = new DateTimeOffset(x.PublishingDate ?? DateTime.Now);
 
-                var syndicationItem = new SyndicationItem(x.Title, x.Content, kitschenUri, x.Link.ToString(), pubDate)
+                var syndicationItem = new SyndicationItem(x.Title, x.Content, kitchenUri, link, pubDate)
                 {
                     Id = x.IngridientId,
                     Summary = new TextSyndicationContent(x.Summary, TextSyndicationContentKind.Plaintext),
@@ -41,5 +43,12 @@ namespace FeedKitchen.MenuWaiter.Extensions
             return feed;
         }
 
+        public static Uri SetKitchenUrl(this Ingredient ingredient, ObjectId menuId)
+        {
+            var linkItems = ingredient.Link.Segments;
+            var lpathItem = linkItems[linkItems.Length - 1];            
+            var kitchenUrl = $"https://localhost:5001/Item/{menuId}/{ingredient.Id}/{lpathItem}";
+            return new Uri(kitchenUrl);
+        }
     }
 }
