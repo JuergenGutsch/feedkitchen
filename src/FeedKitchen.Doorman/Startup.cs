@@ -3,8 +3,12 @@
 
 
 using Duende.IdentityServer;
+using FeedKitchen.Repositories;
+using FeedKitchen.Shared.Extensions;
+using HealthChecks.UI.Client;
 using IdentityServerHost.Quickstart.UI;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -54,6 +58,12 @@ namespace FeedKitchen.Doorman
                     options.ClientId = "copy client ID from Google here";
                     options.ClientSecret = "copy client secret from Google here";
                 });
+
+            services.AddMongoOptions(Configuration);
+            services.AddSingleton<RecipeRepository>();
+
+            services.AddHealthChecks()
+                .AddMongoDbCheck(Configuration);
         }
 
         public void Configure(IApplicationBuilder app)
@@ -71,6 +81,11 @@ namespace FeedKitchen.Doorman
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapDefaultControllerRoute();
+                endpoints.MapHealthChecks("/health", new HealthCheckOptions
+                {
+                    Predicate = _ => true,
+                    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+                });
             });
         }
     }

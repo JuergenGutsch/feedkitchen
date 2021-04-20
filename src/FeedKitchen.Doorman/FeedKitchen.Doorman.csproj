@@ -5,10 +5,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AspNetCore.HealthChecks.MongoDb" Version="5.0.1" />
+    <PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="5.0.1" />
     <PackageReference Include="Duende.IdentityServer" Version="5.0.0" />
     
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="6.0.0-preview.1.21103.6" />
     <PackageReference Include="Serilog.AspNetCore" Version="3.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FeedKitchen.Repositories\FeedKitchen.Repositories.csproj" />
+    <ProjectReference Include="..\FeedKitchen.Shared\FeedKitchen.Shared.csproj" />
   </ItemGroup>
 
 </Project>

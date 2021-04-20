@@ -1,7 +1,9 @@
 using FeedKitchen.MenuWaiter.OutputFormatters;
 using FeedKitchen.Repositories;
-using FeedKitchen.Shared.Options;
+using FeedKitchen.Shared.Extensions;
+using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.Configuration;
@@ -40,18 +42,8 @@ namespace FeedKitchen.MenuWaiter
             {
                 options.AllowSynchronousIO = true;
             });
-            services.Configure<MongoOptions>(c =>
-            {
-                c.MONGO_INITDB_ROOT_USERNAME = Configuration.GetValue<string>("MONGO_INITDB_ROOT_USERNAME");
-                c.MONGO_INITDB_ROOT_PASSWORD = Configuration.GetValue<string>("MONGO_INITDB_ROOT_PASSWORD");
-                c.ME_CONFIG_MONGODB_ADMINUSERNAME = Configuration.GetValue<string>("ME_CONFIG_MONGODB_ADMINUSERNAME");
-                c.ME_CONFIG_MONGODB_ADMINPASSWORD = Configuration.GetValue<string>("ME_CONFIG_MONGODB_ADMINPASSWORD");
 
-                c.MONGODB_USERNAME = Configuration.GetValue<string>("MONGODB_USERNAME");
-                c.MONGODB_PASSWORD = Configuration.GetValue<string>("MONGODB_PASSWORD");
-                c.MONGODB_SERVER = Configuration.GetValue<string>("MONGODB_SERVER");
-                c.MONGODB_DATABASE = Configuration.GetValue<string>("MONGODB_DATABASE");
-            });
+            services.AddMongoOptions(Configuration);
             services.AddSingleton<RecipeRepository>();
 
 
@@ -59,6 +51,9 @@ namespace FeedKitchen.MenuWaiter
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "FeedKitchen.MenuWaiter", Version = "v1" });
             });
+
+            services.AddHealthChecks()
+                .AddMongoDbCheck(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -80,6 +75,11 @@ namespace FeedKitchen.MenuWaiter
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHealthChecks("/health", new HealthCheckOptions
+                {
+                    Predicate = _ => true,
+                    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+                });
             });
         }
     }
