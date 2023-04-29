@@ -56,5 +56,19 @@
   <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
   <ItemGroup>
     <Folder Include="Properties" />
+    <Folder Include="dbo" />
+    <Folder Include="dbo\tables" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="dbo\tables\Recipes.sql" />
+    <Build Include="dbo\tables\Authors.sql" />
+    <Build Include="dbo\tables\Menus.sql" />
+    <Build Include="dbo\tables\Ingredients.sql" />
+    <Build Include="dbo\tables\Categories.sql" />
+    <Build Include="dbo\tables\Ingredient_Menu.sql" />
+    <Build Include="dbo\tables\Ingredient_Recipe.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="FeedKittchen.Database.refactorlog" />
   </ItemGroup>
 </Project>

@@ -8,4 +8,5 @@
     [PublishingDate] DATETIME2 NOT NULL,
     [Content] NVARCHAR(500) NOT NULL, 
     [Summary] NVARCHAR(500) NOT NULL, 
+    CONSTRAINT [FK_Ingredients_Authors] FOREIGN KEY ([Author_Id]) REFERENCES [Authors]([Id]), 
 )

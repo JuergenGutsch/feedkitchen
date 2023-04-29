@@ -6,4 +6,5 @@
     [LastUpdate] DATETIME2 NOT NULL, 
     [Url] NVARCHAR(500) NOT NULL, 
     [Author_Id] BIGINT NOT NULL,
+    CONSTRAINT [FK_Recipes_Menus] FOREIGN KEY ([Author_Id]) REFERENCES [Authors]([Id])
 )
