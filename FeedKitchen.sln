@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.6.30114.105
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33530.505
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{C15ADA74-C8F5-4558-8925-ABC07F233B16}"
 EndProject
@@ -41,6 +41,10 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FeedKitchen.Repositories", "src\FeedKitchen.Repositories\FeedKitchen.Repositories.csproj", "{EAF4EB97-3FD2-4454-B741-35780917E3AE}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FeedKitchen.Doorman", "src\FeedKitchen.Doorman\FeedKitchen.Doorman.csproj", "{F79438D7-115C-4672-8867-66BAD24D57F9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sql", "sql", "{EFAD1196-A4A0-4AC3-8A23-9B43237A4BB2}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "FeedKittchen.Database", "FeedKittchen.Database\FeedKittchen.Database.sqlproj", "{BD49F012-F761-4C8A-B30B-667EB0C880C8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -196,6 +200,24 @@ Global
 		{F79438D7-115C-4672-8867-66BAD24D57F9}.Release|x64.Build.0 = Release|Any CPU
 		{F79438D7-115C-4672-8867-66BAD24D57F9}.Release|x86.ActiveCfg = Release|Any CPU
 		{F79438D7-115C-4672-8867-66BAD24D57F9}.Release|x86.Build.0 = Release|Any CPU
+		{BD49F012-F761-4C8A-B30B-667EB0C880C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD49F012-F761-4C8A-B30B-667EB0C880C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD49F012-F761-4C8A-B30B-667EB0C880C8}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{BD49F012-F761-4C8A-B30B-667EB0C880C8}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{BD49F012-F761-4C8A-B30B-667EB0C880C8}.Debug|x64.Build.0 = Debug|Any CPU
+		{BD49F012-F761-4C8A-B30B-667EB0C880C8}.Debug|x64.Deploy.0 = Debug|Any CPU
+		{BD49F012-F761-4C8A-B30B-667EB0C880C8}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{BD49F012-F761-4C8A-B30B-667EB0C880C8}.Debug|x86.Build.0 = Debug|Any CPU
+		{BD49F012-F761-4C8A-B30B-667EB0C880C8}.Debug|x86.Deploy.0 = Debug|Any CPU
+		{BD49F012-F761-4C8A-B30B-667EB0C880C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD49F012-F761-4C8A-B30B-667EB0C880C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD49F012-F761-4C8A-B30B-667EB0C880C8}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{BD49F012-F761-4C8A-B30B-667EB0C880C8}.Release|x64.ActiveCfg = Release|Any CPU
+		{BD49F012-F761-4C8A-B30B-667EB0C880C8}.Release|x64.Build.0 = Release|Any CPU
+		{BD49F012-F761-4C8A-B30B-667EB0C880C8}.Release|x64.Deploy.0 = Release|Any CPU
+		{BD49F012-F761-4C8A-B30B-667EB0C880C8}.Release|x86.ActiveCfg = Release|Any CPU
+		{BD49F012-F761-4C8A-B30B-667EB0C880C8}.Release|x86.Build.0 = Release|Any CPU
+		{BD49F012-F761-4C8A-B30B-667EB0C880C8}.Release|x86.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -213,6 +235,7 @@ Global
 		{0F77FB1E-8A59-44E9-A095-4BBD4D9B82AA} = {C15ADA74-C8F5-4558-8925-ABC07F233B16}
 		{EAF4EB97-3FD2-4454-B741-35780917E3AE} = {C15ADA74-C8F5-4558-8925-ABC07F233B16}
 		{F79438D7-115C-4672-8867-66BAD24D57F9} = {C15ADA74-C8F5-4558-8925-ABC07F233B16}
+		{BD49F012-F761-4C8A-B30B-667EB0C880C8} = {EFAD1196-A4A0-4AC3-8A23-9B43237A4BB2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5B022EB5-A161-4197-AE5C-9759AECEB686}

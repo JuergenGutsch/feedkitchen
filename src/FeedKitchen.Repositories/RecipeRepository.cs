@@ -1,14 +1,10 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using FeedKitchen.Shared.Models;
 using FeedKitchen.Shared.Options;
-using MongoDB.Driver;
 using Microsoft.Extensions.Options;
 using System.Collections.Generic;
-using System.Linq;
-using DnsClient.Internal;
 using Microsoft.Extensions.Logging;
-using MongoDB.Bson;
+using Dapper;
 
 namespace FeedKitchen.Repositories
 {
@@ -17,7 +13,7 @@ namespace FeedKitchen.Repositories
         private readonly ILogger<RecipeRepository> _logger;
 
         public RecipeRepository(
-            IOptions<MongoOptions> mongoOptions,
+            IOptions<DatabaseOptions> mongoOptions,
             ILogger<RecipeRepository> logger)
         : base(mongoOptions, logger)
         {
@@ -27,19 +23,17 @@ namespace FeedKitchen.Repositories
         public async Task SaveChanges(Recipe recipe)
         {
             _logger.LogDebug("SaveChanges", recipe);
-            var mongoRecipes = Database.GetCollection<Recipe>("Recipes");
-            var filter = Builders<Recipe>.Filter.Eq(r => r.Id, recipe.Id);
 
-            var result = await mongoRecipes.ReplaceOneAsync(filter, recipe);
+           var result =  await Database.ExecuteAsync("UPDATE recipes SET ... WHERE ID = @Id", recipe);
+
+            _logger.LogDebug("SaveChanges", result);
         }
 
-        public async Task<Recipe> Load(ObjectId recipeId)
+        public async Task<Recipe> Load(int recipeId)
         {
             _logger.LogDebug("Load", recipeId);
-            var mongoRecipes = Database.GetCollection<Recipe>("Recipes");
-            var recipe =  mongoRecipes.AsQueryable()
-                .Where(x => x.Id == recipeId)
-                .FirstOrDefault();
+
+            var recipe = await Database.QueryFirstAsync<Recipe>("SELECT ... FROM recipes WHERE id = @Id", new { Id = recipeId });
 
             return recipe;
         }
@@ -47,10 +41,8 @@ namespace FeedKitchen.Repositories
         public async Task<Recipe> Load(string name)
         {
             _logger.LogDebug("Load", name);
-            var mongoRecipes = Database.GetCollection<Recipe>("Recipes");
-            var recipe = mongoRecipes.AsQueryable()
-                .Where(x => x.RecipeId == name)
-                .FirstOrDefault();
+
+            var recipe = await Database.QueryFirstAsync<Recipe>("SELECT ... FROM recipes WHERE name = @Name", new { Name = name });
 
             return recipe;
         }
@@ -58,18 +50,17 @@ namespace FeedKitchen.Repositories
         public async Task<IEnumerable<Recipe>> LoadActiveRecipes()
         {
             _logger.LogDebug("LoadActiveRecipes");
-            var mongoRecipes = Database.GetCollection<Recipe>("Recipes");
-            var queryable = mongoRecipes.AsQueryable()
-                .OrderByDescending(x => x.LastUpdate);
 
-            return queryable;
+            var recipes = await Database.QueryAsync<Recipe>("SELECT ... FROM recipes ORDER BY LastUpdate DESC");
+
+            return recipes;
         }
 
         public async Task AddRecipe(Recipe recipe)
         {
-            _logger.LogDebug("AddRecipe", recipe);
-            var mongoRecipes = Database.GetCollection<Recipe>("Recipes");
-            await mongoRecipes.InsertOneAsync(recipe);
+            _logger.LogDebug("AddRecipe", recipe); 
+            var result = await Database.ExecuteAsync("INSERT INTO recipes (...) VALUES ... ", recipe);
+
         }
     }
 }

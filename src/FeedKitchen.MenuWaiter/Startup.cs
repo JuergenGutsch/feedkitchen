@@ -40,17 +40,9 @@ namespace FeedKitchen.MenuWaiter
             {
                 options.AllowSynchronousIO = true;
             });
-            services.Configure<MongoOptions>(c =>
+            services.Configure<DatabaseOptions>(c =>
             {
-                c.MONGO_INITDB_ROOT_USERNAME = Configuration.GetValue<string>("MONGO_INITDB_ROOT_USERNAME");
-                c.MONGO_INITDB_ROOT_PASSWORD = Configuration.GetValue<string>("MONGO_INITDB_ROOT_PASSWORD");
-                c.ME_CONFIG_MONGODB_ADMINUSERNAME = Configuration.GetValue<string>("ME_CONFIG_MONGODB_ADMINUSERNAME");
-                c.ME_CONFIG_MONGODB_ADMINPASSWORD = Configuration.GetValue<string>("ME_CONFIG_MONGODB_ADMINPASSWORD");
-
-                c.MONGODB_USERNAME = Configuration.GetValue<string>("MONGODB_USERNAME");
-                c.MONGODB_PASSWORD = Configuration.GetValue<string>("MONGODB_PASSWORD");
-                c.MONGODB_SERVER = Configuration.GetValue<string>("MONGODB_SERVER");
-                c.MONGODB_DATABASE = Configuration.GetValue<string>("MONGODB_DATABASE");
+                c.ConnectionString = Configuration.GetValue<string>("ConnectionString");
             });
             services.AddSingleton<RecipeRepository>();
 

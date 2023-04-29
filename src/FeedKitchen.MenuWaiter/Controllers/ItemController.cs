@@ -2,7 +2,6 @@
 using Microsoft.Extensions.Logging;
 using FeedKitchen.Repositories;
 using System.Threading.Tasks;
-using MongoDB.Bson;
 using System.Linq;
 
 namespace FeedKitchen.MenuWaiter.Controllers
@@ -23,12 +22,11 @@ namespace FeedKitchen.MenuWaiter.Controllers
         }
 
         [HttpGet("{menuId}/{itemId}/{urlPart}")]
-        public async Task<ActionResult<object>> Item(string menuId, string itemId, string urlPart)
+        public async Task<ActionResult<object>> Item(int menuId, int itemId, string urlPart)
         {
             _logger.LogInformation($"Item '{menuId}/{itemId}/{urlPart}'");
 
-            var menuObjectId = new ObjectId(menuId);
-            var link = await LoadLink(menuObjectId, itemId);
+            var link = await LoadLink(menuId, itemId);
 
             if (string.IsNullOrWhiteSpace(link))
             {
@@ -40,11 +38,11 @@ namespace FeedKitchen.MenuWaiter.Controllers
             }
         }
 
-        private async Task<string> LoadLink(ObjectId menuObjectId, string itemId)
+        private async Task<string> LoadLink(int meniId, int itemId)
         {
             string link = string.Empty;
 
-            var recipe = await _repository.Load(menuObjectId);
+            var recipe = await _repository.Load(meniId);
             if (recipe is not null)
             {
                 var item = recipe.Ingredients.Where(x => x.Id == itemId).FirstOrDefault();

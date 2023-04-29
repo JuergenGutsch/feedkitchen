@@ -1,12 +1,13 @@
 ﻿using FeedKitchen.Shared.Extensions;
 using FeedKitchen.Shared.Models;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace FeedKitchen.MenuWaiter.Extensions
 {
     public static class RecipeExtensions
     {
-        public static Menu Cook(this Recipe recipe)
+        public static async Task<Menu> Cook(this Recipe recipe)
         {
             if (recipe is null)
             {

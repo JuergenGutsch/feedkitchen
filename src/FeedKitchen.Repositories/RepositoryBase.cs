@@ -1,49 +1,47 @@
 using FeedKitchen.Shared.Options;
 using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Logging;
-using MongoDB.Driver;
-
+using Microsoft.Data.SqlClient;
+using System.Data.Common;
+using System.Threading.Tasks;
 
 namespace FeedKitchen.Repositories
 {
     public abstract class RepositoryBase
     {
-        private IMongoDatabase _database;
+        private SqlConnection _connection;
 
         protected RepositoryBase(
-            IOptions<MongoOptions> mongoOptions,
+            IOptions<DatabaseOptions> dbOptions,
             ILogger logger)
         {
-            MongoOptions = mongoOptions.Value;
+            DbOptions = dbOptions.Value;
             _logger = logger;
         }
 
-        public IMongoDatabase Database
+        public DbConnection Database
         {
             get
             {
-                return GetOrCreateCbClient();
+                return  GetOrCreateCbClient();
             }
         }
 
-        public MongoOptions MongoOptions { get; }
+        public DatabaseOptions DbOptions { get; }
 
         private readonly ILogger _logger;
 
-        public IMongoDatabase GetOrCreateCbClient()
+        public DbConnection GetOrCreateCbClient()
         {
-            if (_database == null)
+            if (_connection == null)
             {
-                var username = MongoOptions.MONGODB_USERNAME;
-                var password = MongoOptions.MONGODB_PASSWORD;
-                var server = MongoOptions.MONGODB_SERVER;
-                var database = MongoOptions.MONGODB_DATABASE;
-                var connectionString = $"mongodb+srv://{username}:{password}@{server}/{database}?retryWrites=true&w=majority";
+                var connectionString = DbOptions.ConnectionString;
                 _logger.LogInformation(connectionString);
-                var client = new MongoClient(connectionString);
-                _database = client.GetDatabase(database);
+                var connection = new SqlConnection(connectionString);
+                 connection.Open();
+                _connection = connection;
             }
-            return _database;
+            return _connection;
         }
     }
 }

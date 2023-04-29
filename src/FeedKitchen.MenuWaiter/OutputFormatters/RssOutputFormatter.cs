@@ -24,7 +24,7 @@ namespace FeedKitchen.MenuWaiter.OutputFormatters
 
             using (var xmlWriter = XmlWriter.Create(response.Body))
             {
-                var feed = menu.Serve();
+                var feed = await menu.Serve();
                 feed.SaveAsRss20(xmlWriter);
             }
         }

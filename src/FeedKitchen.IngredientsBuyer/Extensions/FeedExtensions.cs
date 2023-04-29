@@ -23,10 +23,8 @@ namespace FeedKitchen.IngredientsBuyer.Extensions
 
         public static Ingredient Convert(this FeedItem item)
         {
-            var id = Guid.NewGuid().ToString("N");
             return new Ingredient
             {
-                Id = id,
                 IngridientId = item.Id,
                 Title = item.Title,
                 Link = new Uri(item.Link),

@@ -1,0 +1,6 @@
+﻿CREATE TABLE [dbo].[Authors]
+(
+	[Id] BIGINT NOT NULL PRIMARY KEY, 
+    [Name] NVARCHAR(500) NOT NULL, 
+    [Email] NVARCHAR(500) NOT NULL
+)

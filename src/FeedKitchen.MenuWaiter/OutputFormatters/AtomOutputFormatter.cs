@@ -23,7 +23,7 @@ namespace FeedKitchen.MenuWaiter.OutputFormatters
 
             using (var xmlWriter = XmlWriter.Create(response.Body))
             {
-                var feed = menu.Serve();
+                var feed = await menu.Serve();
                 feed.SaveAsAtom10(xmlWriter);
             }
         }

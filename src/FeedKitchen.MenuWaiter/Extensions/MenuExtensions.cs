@@ -1,16 +1,15 @@
 ﻿using FeedKitchen.Shared.Extensions;
 using FeedKitchen.Shared.Models;
-using MongoDB.Bson;
 using System;
 using System.Linq;
 using System.ServiceModel.Syndication;
+using System.Threading.Tasks;
 
 namespace FeedKitchen.MenuWaiter.Extensions
 {
     public static class MenuExtensions
     {
-
-        public static SyndicationFeed Serve(this Menu menu)
+        public static async Task<SyndicationFeed> Serve(this Menu menu)
         {
             var feed = new SyndicationFeed(
                    menu.Title, menu.Description,
@@ -43,7 +42,7 @@ namespace FeedKitchen.MenuWaiter.Extensions
             return feed;
         }
 
-        public static Uri SetKitchenUrl(this Ingredient ingredient, ObjectId menuId)
+        public static Uri SetKitchenUrl(this Ingredient ingredient, int menuId)
         {
             var linkItems = ingredient.Link.Segments;
             var lpathItem = linkItems[linkItems.Length - 1];            

@@ -5,7 +5,7 @@ namespace FeedKitchen.Shared.Models
 {
     public class Ingredient
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
         public string IngridientId { get; set; }
         public string Title { get; set; }
         public Uri Link { get; set; }

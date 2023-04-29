@@ -28,7 +28,7 @@ namespace FeedKitchen.MenuWaiter.Controllers
 
             var recipe = await _repository.Load(name);
 
-            var menu = recipe.Cook();
+            var menu = await recipe.Cook();
 
             return menu;
         }
