@@ -54,7 +54,7 @@ namespace FeedKitchen.IngredientsBuyer
                         var feed = await _ingredientLoader.Load(recipe.Url);
                         if (recipe.Update(feed))
                         {
-                            await _recipeRepository.SaveChanges(recipe);
+                            await _recipeRepository.Save(recipe);
                         }
                     }
 

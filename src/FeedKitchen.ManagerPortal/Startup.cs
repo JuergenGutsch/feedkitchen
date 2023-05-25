@@ -1,17 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace FeedKitchen.ChefPortal
+namespace FeedKitchen.ManagerPortal
 {
     public class Startup
     {
@@ -36,8 +31,8 @@ namespace FeedKitchen.ChefPortal
                 options.SignInScheme = "Cookies";
                 options.Authority = "https://localhost:5000";
                 options.RequireHttpsMetadata = true;
-                options.ClientId = "chef_portal_client";
-                options.ClientSecret = "chef_portal_client_secret";
+                options.ClientId = "manager_portal_client";
+                options.ClientSecret = "manager_portal_client_secret";
                 options.ResponseType = "code";
                 options.UsePkce = true;
                 options.Scope.Add("profile");

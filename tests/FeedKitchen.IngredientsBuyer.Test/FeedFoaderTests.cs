@@ -1,22 +1,23 @@
 using Xunit;
-using Microsoft.Extensions.Logging;
-using Moq;
 using System;
+using FeedKitchen.IncredientsBuyerFunction.Extensions;
+using FeedKitchen.Shared.Models;
+using System.Threading.Tasks;
 
 namespace FeedKitchen.IngredientsBuyer.Test
 {
     public class FeedLoaderTests
     {
         [Fact]
-        public async void LoadAtomTest()
+        public async Task LoadAtomTest()
         {
-            var testUri = new Uri("http://asp.net-hacker.rocks/atom.xml");
-            var mock = new Mock<ILogger<IngredientLoader>>();
+            var ingredient = new Ingredient
+            {
+                Url = new Uri("http://asp.net-hacker.rocks/atom.xml")
+            };
 
-            var logger = mock.Object;
-            var sut = new IngredientLoader(logger);
+            var feed = await IngredientExtensions.Buy(ingredient);
 
-            var feed = await sut.Load(testUri);
 
             Assert.Equal("ASP.NET Hacker", feed.Title);
         }

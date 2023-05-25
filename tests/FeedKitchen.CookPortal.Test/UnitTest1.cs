@@ -1,7 +1,7 @@
 using System;
 using Xunit;
 
-namespace FeedKitchen.CookPortal.Test
+namespace FeedKitchen.ChefPortal.Test
 {
     public class UnitTest1
     {

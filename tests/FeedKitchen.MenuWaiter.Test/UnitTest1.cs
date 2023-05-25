@@ -1,7 +1,7 @@
 using System;
 using Xunit;
 
-namespace FeedKitchen.MenuWaiter.Test
+namespace FeedKitchen.WaiterApp.Test
 {
     public class UnitTest1
     {

@@ -4,10 +4,11 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Data.SqlClient;
 using System.Data.Common;
 using System.Threading.Tasks;
+using System;
 
 namespace FeedKitchen.Repositories
 {
-    public abstract class RepositoryBase
+    public abstract class RepositoryBase : IDisposable
     {
         private SqlConnection _connection;
 
@@ -23,7 +24,7 @@ namespace FeedKitchen.Repositories
         {
             get
             {
-                return  GetOrCreateCbClient();
+                return GetOrCreateCbClient();
             }
         }
 
@@ -38,10 +39,18 @@ namespace FeedKitchen.Repositories
                 var connectionString = DbOptions.ConnectionString;
                 _logger.LogInformation(connectionString);
                 var connection = new SqlConnection(connectionString);
-                 connection.Open();
+                connection.Open();
                 _connection = connection;
             }
             return _connection;
+        }
+
+        public void Dispose()
+        {
+            if (_connection != null && _connection.State == System.Data.ConnectionState.Open)
+            {
+                _connection.Close();
+            }
         }
     }
 }

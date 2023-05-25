@@ -11,6 +11,6 @@ namespace FeedKitchen.Shared.Models
         public DateTime? LastUpdate { get; set; }
         public Uri Url { get; set; }
         public Author Author { get; set; } = new Author();
-        public ICollection<Ingredient> Ingredients { get; set; } = new List<Ingredient>();
+        public ICollection<Fixing> Fixings { get; set; } = new List<Fixing>();
     }
 }

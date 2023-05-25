@@ -5,68 +5,62 @@ This will not burn the feeds, but cook them and serve them like a delicious menu
 
 Components:
 
-## Cook Portal
-Enables the cooks (users) to cook (configure) their menus (feeds)
+## Chef Portal
+Enables the chefs (users) to define (configure) their recipes (feeds)
 
 * Menu configuration
 * Menu statistics
 
 
-## Chef portal
-Enables the chefs (admins) to manage the kitchen
+## Manager portal
+Enables the managers (admins) to manage the kitchen
 
 * Admin / configuration area
-* Cook stats
+* Chef stats
 * Ban Ingredients 
-* MAnage cooks
+* Manage chefs
 * Ban guests
 
 
-## Menu Waiter
+## Waiter App
 Is serving the cooked menus (target feeds)
 
 
-## Ingredients Buyer
+## Buyer Function
 Is buying (fetches) the ingredients (source feed) on a regular basis
 
 
 ## Glossary
 
-* Chef
+* Manager
   * Administrator
-* Cook
-  * User
+* Chef
+  * User who defines the Menus
 * Guests
-  * Consumers / Clients
+  * Consumers / Clients who consumes the Menu
 * Kitchen
-  * Application
+  * The entire application
+* Waiter
+  * App that serves the target feed
+* Buyer
+  * Function App that fetches the Ingredients from the source feed
+* Doorman
+  * Authentication app
+* Recipe
+  * Definition of the Menu
+  * Containes Ingredients defined by the Chef
+* Ingredients
+  * A set of source feeds
+* Fixings
+  * A set of boght Ingredients to cook to get the Menu
+  * The actual feed items from the source feeds 
 * Menu
   * Target feed
-* Ingredients
-  * Source feed
+  * cooked out of the Recipe and the Fixings
+* To buye
+  * Fetching the Ingredients from the source feeds
 * To cook
-  * Building the target feed
-* Waiter
-  * Server
+  * Building the Menu out of the Recipe and the fetched Ingredients
 * Spices
-  * Monetarization and stuff
-
-## Docker Compose
-(not yet completely configured)
-
-To run docker compose you need to add a `.env` file to the docker folder.
-
-Currently this files contains the following variables:
-
-``` env
-# mongo
-MONGO_INITDB_ROOT_USERNAME=youruser
-MONGO_INITDB_ROOT_PASSWORD=yourtopsecretpassword
-
-# mongo-express
-ME_CONFIG_MONGODB_ADMINUSERNAME=youruser
-ME_CONFIG_MONGODB_ADMINPASSWORD=yourtopsecretpassword
-```
-
-after that you can run `docker-compose up` to run the application
+  * Monetarization, Styling and stuff
 
