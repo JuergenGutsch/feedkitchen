@@ -1,6 +1,6 @@
 using FeedKitchen.Repositories;
 using FeedKitchen.Shared.Options;
-using FeedKitchen.WaiterApp.OutputFormatters;
+using FeedKitchen.Waiter.OutputFormatters;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.OpenApi.Models;
 using Microsoft.Net.Http.Headers;

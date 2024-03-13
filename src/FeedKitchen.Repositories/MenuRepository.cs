@@ -17,7 +17,7 @@ namespace FeedKitchen.Repositories
             _logger = logger;
         }
 
-        public async Task<IEnumerable<Menu>> Manus() {
+        public async Task<IEnumerable<Menu>> Menus() {
 
             _logger.LogDebug("LoadActiveRecipes");
 
@@ -26,7 +26,14 @@ namespace FeedKitchen.Repositories
             return recipes;
         }
 
-        public async Task Cook(Recipe recipe, IEnumerable<Fixing> ingredients)
+        /// <summary>
+        /// Store fixings into the fridge
+        /// </summary>
+        /// <param name="recipe"></param>
+        /// <param name="ingredients"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public async Task Store(Recipe recipe, IEnumerable<Fixing> ingredients)
         {
             throw new NotImplementedException();
         }

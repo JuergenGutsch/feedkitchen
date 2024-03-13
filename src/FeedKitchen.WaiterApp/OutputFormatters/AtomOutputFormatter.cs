@@ -1,11 +1,10 @@
-﻿using FeedKitchen.WaiterApp.Extensions;
+﻿using FeedKitchen.Waiter.Extensions;
 using FeedKitchen.Shared.Models;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using System.Text;
-using System.Threading.Tasks;
 using System.Xml;
 
-namespace FeedKitchen.WaiterApp.OutputFormatters
+namespace FeedKitchen.Waiter.OutputFormatters
 {
     public class Atom1OutputFormatter : BaseOutputFormatter
     {

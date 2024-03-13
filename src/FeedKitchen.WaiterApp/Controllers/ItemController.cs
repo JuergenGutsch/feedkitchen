@@ -4,7 +4,7 @@ using FeedKitchen.Repositories;
 using System.Threading.Tasks;
 using System.Linq;
 
-namespace FeedKitchen.WaiterApp.Controllers
+namespace FeedKitchen.Waiter.Controllers
 {
     [ApiController]
     [Route("[controller]")]

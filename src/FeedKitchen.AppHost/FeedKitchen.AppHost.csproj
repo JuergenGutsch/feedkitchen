@@ -17,7 +17,7 @@
     <ProjectReference Include="..\FeedKitchen.ChefPortal\FeedKitchen.ChefPortal.csproj" />
     <ProjectReference Include="..\FeedKitchen.Doorman\FeedKitchen.Doorman.csproj" />
     <ProjectReference Include="..\FeedKitchen.ManagerPortal\FeedKitchen.ManagerPortal.csproj" />
-    <ProjectReference Include="..\FeedKitchen.WaiterApp\FeedKitchen.WaiterApp.csproj" />
+    <ProjectReference Include="..\FeedKitchen.WaiterApp\FeedKitchen.Waiter.csproj" />
     <ProjectReference Include="..\FeedKitchen.WaiterApp\FeedKitchen.Buyer.csproj" />
   </ItemGroup>
 

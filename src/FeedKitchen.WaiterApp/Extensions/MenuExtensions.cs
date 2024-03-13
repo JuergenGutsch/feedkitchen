@@ -5,7 +5,7 @@ using System.Linq;
 using System.ServiceModel.Syndication;
 using System.Threading.Tasks;
 
-namespace FeedKitchen.WaiterApp.Extensions
+namespace FeedKitchen.Waiter.Extensions
 {
     public static class MenuExtensions
     {

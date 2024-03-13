@@ -1,6 +1,6 @@
 using Xunit;
 using System;
-using FeedKitchen.BuyerFunction.Extensions;
+using FeedKitchen.Buyer.Extensions;
 using FeedKitchen.Shared.Models;
 using System.Threading.Tasks;
 

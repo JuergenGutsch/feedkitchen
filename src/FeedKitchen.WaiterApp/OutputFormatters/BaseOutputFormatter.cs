@@ -4,7 +4,7 @@ using Microsoft.Net.Http.Headers;
 using System;
 using System.Text;
 
-namespace FeedKitchen.WaiterApp.OutputFormatters
+namespace FeedKitchen.Waiter.OutputFormatters
 {
     public abstract class BaseOutputFormatter : TextOutputFormatter
     {

@@ -1,7 +1,4 @@
-using System;
-using Xunit;
-
-namespace FeedKitchen.Infrastructure.Test
+namespace FeedKitchen.Repositories.Tests
 {
     public class UnitTest1
     {

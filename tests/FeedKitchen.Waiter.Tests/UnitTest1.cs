@@ -1,9 +1,9 @@
 using System;
 using Xunit;
 
-namespace FeedKitchen.ChefPortal.Test
+namespace FeedKitchen.WaiterApp.Test
 {
-    public class UnitTest1
+    public class EnumerableExtensionsTests
     {
         [Fact]
         public void Test1()

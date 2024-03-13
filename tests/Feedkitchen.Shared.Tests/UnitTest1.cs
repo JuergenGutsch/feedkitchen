@@ -1,7 +1,4 @@
-using System;
-using Xunit;
-
-namespace FeedKitchen.WaiterApp.Test
+namespace Feedkitchen.Shared.Tests
 {
     public class UnitTest1
     {

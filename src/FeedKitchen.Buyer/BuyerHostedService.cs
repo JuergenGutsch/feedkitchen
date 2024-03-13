@@ -13,7 +13,7 @@ internal class BuyerHostedService : IHostedService, IDisposable
 
     public BuyerHostedService(
         RecipeRepository recipeRepository,
-        MenuRepository menuRepository
+        MenuRepository menuRepository,
         ILogger<BuyerHostedService> logger)
     {
         _recipeRepository = recipeRepository;
@@ -40,10 +40,9 @@ internal class BuyerHostedService : IHostedService, IDisposable
             {
                 foreach (var ingredient in recipe.Ingredients)
                 {
-                    var feed = await ingredient.Buy();
-                    var fixings = feed.Convert();
+                    var fixings = await ingredient.Buy();
 
-                    _menuRepository.Cook(recipe, fixings);
+                   await _menuRepository.Store(recipe, fixings);
                 }
             }
         }

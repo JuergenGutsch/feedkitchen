@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using FeedKitchen.WaiterApp.Extensions;
+using FeedKitchen.Waiter.Extensions;
 using FeedKitchen.Repositories;
 using System.Threading.Tasks;
 using FeedKitchen.Shared.Models;
 
-namespace FeedKitchen.WaiterApp.Controllers
+namespace FeedKitchen.Waiter.Controllers
 {
     [ApiController]
     [Route("[controller]")]
