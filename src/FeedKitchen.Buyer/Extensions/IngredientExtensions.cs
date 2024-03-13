@@ -1,7 +1,7 @@
 using CodeHollow.FeedReader;
 using FeedKitchen.Shared.Models;
 
-namespace FeedKitchen.BuyerFunction.Extensions
+namespace FeedKitchen.Buyer.Extensions
 {
     public static class IngredientExtensions
     {

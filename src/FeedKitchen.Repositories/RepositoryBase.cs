@@ -1,55 +1,44 @@
-using FeedKitchen.Shared.Options;
-using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Logging;
 using Microsoft.Data.SqlClient;
 using System.Data.Common;
-using System.Threading.Tasks;
-using System;
 
 namespace FeedKitchen.Repositories
 {
     public abstract class RepositoryBase : IDisposable
     {
-        private SqlConnection _connection;
+        private readonly SqlConnection _sqlConnection;
+        private readonly ILogger _logger;
 
         protected RepositoryBase(
-            IOptions<DatabaseOptions> dbOptions,
+            SqlConnection sqlConnection,
             ILogger logger)
         {
-            DbOptions = dbOptions.Value;
+            _sqlConnection = sqlConnection;
             _logger = logger;
         }
 
-        public DbConnection Database
+        protected DbConnection Database
         {
             get
             {
-                return GetOrCreateCbClient();
+                EnsureOpenConnection();
+                return _sqlConnection;
             }
         }
 
-        public DatabaseOptions DbOptions { get; }
-
-        private readonly ILogger _logger;
-
-        public DbConnection GetOrCreateCbClient()
+        protected void EnsureOpenConnection()
         {
-            if (_connection == null)
+            if (_sqlConnection.State ==  System.Data.ConnectionState.Closed)
             {
-                var connectionString = DbOptions.ConnectionString;
-                _logger.LogInformation(connectionString);
-                var connection = new SqlConnection(connectionString);
-                connection.Open();
-                _connection = connection;
+                 _sqlConnection.Open();
             }
-            return _connection;
         }
 
         public void Dispose()
         {
-            if (_connection != null && _connection.State == System.Data.ConnectionState.Open)
+            if (_sqlConnection != null && _sqlConnection.State == System.Data.ConnectionState.Open)
             {
-                _connection.Close();
+                _sqlConnection.Close();
             }
         }
     }

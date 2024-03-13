@@ -1,7 +1,7 @@
 ﻿CREATE TABLE [dbo].[Categories]
 (
-	[Id] BIGINT NOT NULL PRIMARY KEY, 
+	[Id] BIGINT IDENTITY(1,1) PRIMARY KEY,
     [Name] NVARCHAR(250) NOT NULL, 
-    [Fixing_Id] BIGINT NOT NULL, 
-    CONSTRAINT [FK_Categories_Fixings] FOREIGN KEY ([Fixing_Id]) REFERENCES [Fixings]([Id])
+    [FixingId] BIGINT NOT NULL, 
+    CONSTRAINT [FK_Categories_Fixings] FOREIGN KEY ([FixingId]) REFERENCES [Fixings]([Id])
 )

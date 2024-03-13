@@ -1,10 +1,7 @@
-﻿using System.Threading.Tasks;
-using FeedKitchen.Shared.Models;
-using FeedKitchen.Shared.Options;
-using Microsoft.Extensions.Options;
-using System.Collections.Generic;
+﻿using FeedKitchen.Shared.Models;
 using Microsoft.Extensions.Logging;
-using System;
+using Dapper;
+using Microsoft.Data.SqlClient;
 
 namespace FeedKitchen.Repositories
 {
@@ -13,19 +10,28 @@ namespace FeedKitchen.Repositories
         private readonly ILogger<MenuRepository> _logger;
 
         public MenuRepository(
-            IOptions<DatabaseOptions> dbOptions,
+            SqlConnection sqlConnection,
             ILogger<MenuRepository> logger)
-            : base(dbOptions, logger)
+            : base(sqlConnection, logger)
         {
             _logger = logger;
         }
 
-        public void Cook(Recipe recipe, IEnumerable<Fixing> ingredients)
+        public async Task<IEnumerable<Menu>> Manus() {
+
+            _logger.LogDebug("LoadActiveRecipes");
+
+            var recipes = await Database.QueryAsync<Menu>("SELECT Id, Title, Description, LastUpdate, Url FROM menus ORDER BY LastUpdate DESC");
+
+            return recipes;
+        }
+
+        public async Task Cook(Recipe recipe, IEnumerable<Fixing> ingredients)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Menu> Serve(string name)
+        public async Task<Menu> Serve(string name)
         {
             throw new NotImplementedException();
         }

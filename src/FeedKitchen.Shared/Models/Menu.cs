@@ -10,6 +10,8 @@ namespace FeedKitchen.Shared.Models
         public string Description { get; set; }
         public DateTime? LastUpdate { get; set; }
         public Uri Url { get; set; }
+        public int AuthorId { get; set; }
+
         public Author Author { get; set; } = new Author();
         public ICollection<Fixing> Fixings { get; set; } = new List<Fixing>();
     }

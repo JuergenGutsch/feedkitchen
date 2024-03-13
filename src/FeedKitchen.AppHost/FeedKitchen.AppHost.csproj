@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <IsAspireHost>true</IsAspireHost>
+    <UserSecretsId>891b9b77-c2a0-4750-911a-cb082ccd79c5</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Aspire.Hosting" Version="8.0.0-preview.5.24161.10" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FeedKitchen.ChefPortal\FeedKitchen.ChefPortal.csproj" />
+    <ProjectReference Include="..\FeedKitchen.Doorman\FeedKitchen.Doorman.csproj" />
+    <ProjectReference Include="..\FeedKitchen.ManagerPortal\FeedKitchen.ManagerPortal.csproj" />
+    <ProjectReference Include="..\FeedKitchen.WaiterApp\FeedKitchen.WaiterApp.csproj" />
+    <ProjectReference Include="..\FeedKitchen.WaiterApp\FeedKitchen.Buyer.csproj" />
+  </ItemGroup>
+
+</Project>

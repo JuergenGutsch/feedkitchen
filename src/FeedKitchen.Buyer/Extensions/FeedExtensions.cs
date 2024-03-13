@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using CodeHollow.FeedReader;
-using CodeHollow.FeedReader.Feeds;
+﻿using CodeHollow.FeedReader;
 using FeedKitchen.Shared.Models;
 
-namespace FeedKitchen.IngredientsBuyer.Extensions
+namespace FeedKitchen.Buyer.Extensions
 {
     public static class FeedExtensions
     {
