@@ -6,7 +6,7 @@ builder.AddProject<Projects.FeedKitchen_ChefPortal>("feedkitchen.chefportal");
 
 builder.AddProject<Projects.FeedKitchen_Doorman>("feedkitchen.doorman");
 
-builder.AddProject<Projects.FeedKitchen_WaiterApp>("feedkitchen.waiterapp");
+builder.AddProject<Projects.FeedKitchen_Waiter>("feedkitchen.waiter");
 
 builder.AddProject<Projects.FeedKitchen_Buyer>("feedkitchen.buyer");
 

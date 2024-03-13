@@ -4,7 +4,7 @@ using FeedKitchen.Repositories;
 
 namespace FeedKitchen.Buyer;
 
-internal class BuyerHostedService : IHostedService, IDisposable
+public class BuyerHostedService : IHostedService, IDisposable
 {
     private readonly RecipeRepository _recipeRepository;
     private readonly MenuRepository _menuRepository;

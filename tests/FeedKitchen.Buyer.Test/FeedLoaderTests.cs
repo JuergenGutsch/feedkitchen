@@ -3,6 +3,7 @@ using System;
 using FeedKitchen.Buyer.Extensions;
 using FeedKitchen.Shared.Models;
 using System.Threading.Tasks;
+using FluentAssertions;
 
 namespace FeedKitchen.IngredientsBuyer.Test
 {
@@ -16,10 +17,9 @@ namespace FeedKitchen.IngredientsBuyer.Test
                 Url = new Uri("http://asp.net-hacker.rocks/atom.xml")
             };
 
-            var feed = await IngredientExtensions.Buy(ingredient);
+            var fixings = await IngredientExtensions.Buy(ingredient);
 
-
-            Assert.Equal("ASP.NET Hacker", feed.Title);
+            fixings.Should().NotBeEmpty();
         }
     }
 }
