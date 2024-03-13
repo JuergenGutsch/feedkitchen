@@ -56,8 +56,8 @@ namespace FeedKitchen.Repositories
         public async Task AddRecipe(Recipe recipe)
         {
             _logger.LogDebug("AddRecipe", recipe);
-            var result = await Database.ExecuteAsync("INSERT INTO recipes (Title, Description, LastUpdate, AuthorId) VALUES (@Title, @Description, @LastUpdate, @AuthorId) ", recipe);
 
+            var result = await Database.ExecuteAsync("INSERT INTO recipes (Title, Description, LastUpdate, AuthorId) VALUES (@Title, @Description, @LastUpdate, @AuthorId) ", recipe);
         }
 
         public async Task<IEnumerable<Recipe>> LoadActiveRecipes()

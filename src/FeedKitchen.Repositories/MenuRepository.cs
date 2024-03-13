@@ -26,15 +26,10 @@ namespace FeedKitchen.Repositories
             return recipes;
         }
 
-        /// <summary>
-        /// Store fixings into the fridge
-        /// </summary>
-        /// <param name="recipe"></param>
-        /// <param name="ingredients"></param>
-        /// <returns></returns>
-        /// <exception cref="NotImplementedException"></exception>
-        public async Task Store(Recipe recipe, IEnumerable<Fixing> ingredients)
+        public async Task StoreFixings(Recipe recipe, IEnumerable<Fixing> ingredients)
         {
+            var sql = "INERT INTO Fixings ()"
+
             throw new NotImplementedException();
         }
 

@@ -15,5 +15,6 @@ namespace FeedKitchen.Shared.Models
         public string? Content { get; set; }
         public string? Summary { get; set; }
         public string? IngridientId { get; set; }
+        public int RecipeId { get; set; }
     }
 }

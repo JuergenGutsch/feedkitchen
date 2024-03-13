@@ -41,7 +41,7 @@ namespace FeedKitchen.Buyer.Tests
 
             // Assert
             _recipeRepositoryMock.Verify(r => r.LoadActiveRecipes(), Times.Once);
-            _menuRepositoryMock.Verify(m => m.Store(It.IsAny<Recipe>(), It.IsAny<IEnumerable<Fixing>>()), Times.AtLeastOnce);
+            _menuRepositoryMock.Verify(m => m.StoreFixings(It.IsAny<Recipe>(), It.IsAny<IEnumerable<Fixing>>()), Times.AtLeastOnce);
         }
     }
 }

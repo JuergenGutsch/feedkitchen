@@ -5,20 +5,20 @@ namespace FeedKitchen.Buyer.Extensions
 {
     public static class FeedExtensions
     {
-        public static IEnumerable<Fixing> Convert(this Feed feed)
+        public static IEnumerable<Fixing> Convert(this Feed feed, int recipeId)
         {
-            return feed.Items.Convert();
+            return feed.Items.Convert(recipeId);
         }
 
-        public static IEnumerable<Fixing> Convert(this IEnumerable<FeedItem> items)
+        public static IEnumerable<Fixing> Convert(this IEnumerable<FeedItem> items, int recipeId)
         {
             foreach (var item in items)
             {
-                yield return item.Convert();
+                yield return item.Convert(recipeId);
             }
         }
 
-        public static Fixing Convert(this FeedItem item)
+        public static Fixing Convert(this FeedItem item, int recipeId)
         {
             return new Fixing
             {
@@ -29,7 +29,8 @@ namespace FeedKitchen.Buyer.Extensions
                 Categories = item.Categories,
                 PublishingDate = item.PublishingDate,
                 Content = item.Content,
-                Summary = item.Description
+                Summary = item.Description,
+                RecipeId = recipeId
             };
         }
     }
