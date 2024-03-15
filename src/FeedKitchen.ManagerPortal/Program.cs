@@ -5,25 +5,25 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.AddServiceDefaults();
 
-builder.Services.AddAuthentication(options =>
-{
-    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-    options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
-})
-    .AddCookie()
-    .AddOpenIdConnect(options =>
-    {
-        options.SignInScheme = "Cookies";
-        options.Authority = "https://localhost:5000";
-        options.RequireHttpsMetadata = true;
-        options.ClientId = "manager_portal_client";
-        options.ClientSecret = "manager_portal_client_secret";
-        options.ResponseType = "code";
-        options.UsePkce = true;
-        options.Scope.Add("profile");
-        options.Scope.Add("offline_access");
-        options.SaveTokens = true;
-    });
+//builder.Services.AddAuthentication(options =>
+//{
+//    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+//    options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
+//})
+//    .AddCookie()
+//    .AddOpenIdConnect(options =>
+//    {
+//        options.SignInScheme = "Cookies";
+//        options.Authority = "https://localhost:5000";
+//        options.RequireHttpsMetadata = true;
+//        options.ClientId = "manager_portal_client";
+//        options.ClientSecret = "manager_portal_client_secret";
+//        options.ResponseType = "code";
+//        options.UsePkce = true;
+//        options.Scope.Add("profile");
+//        options.Scope.Add("offline_access");
+//        options.SaveTokens = true;
+//    });
 
 builder.Services.AddAuthorization();
 builder.Services.AddRazorPages();

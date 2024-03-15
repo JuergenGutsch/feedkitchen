@@ -1,14 +1,16 @@
 using FeedKitchen.Repositories;
-using FeedKitchen.Shared.Options;
 using FeedKitchen.Waiter.OutputFormatters;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
-using Microsoft.OpenApi.Models;
 using Microsoft.Net.Http.Headers;
+using FeedKitchen.Entities.Models;
+using Microsoft.EntityFrameworkCore;
 
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.AddServiceDefaults();
+
+builder.Services.AddSwaggerGen();
 
 builder.Services.AddControllers()
     .AddMvcOptions(options =>
@@ -26,10 +28,8 @@ builder.Services.Configure<KestrelServerOptions>(options =>
 {
     options.AllowSynchronousIO = true;
 });
-builder.Services.Configure<DatabaseOptions>(c =>
-{
-    c.ConnectionString = builder.Configuration.GetValue<string>("ConnectionString");
-});
+
+builder.Services.AddDbContext<FeedKitchenDbContext>(options => options.UseSqlServer("sql"));
 builder.Services.AddScoped<RecipeRepository>();
 
 var app = builder.Build();

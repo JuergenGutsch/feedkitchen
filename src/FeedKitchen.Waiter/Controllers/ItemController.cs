@@ -1,8 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using FeedKitchen.Repositories;
-using System.Threading.Tasks;
-using System.Linq;
 
 namespace FeedKitchen.Waiter.Controllers
 {

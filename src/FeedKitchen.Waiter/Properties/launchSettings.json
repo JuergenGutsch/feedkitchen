@@ -4,35 +4,34 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:56043",
-      "sslPort": 44309
+      "applicationUrl": "http://localhost:29987",
+      "sslPort": 44329
     }
   },
   "profiles": {
+    "http": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": true,
+      "applicationUrl": "http://localhost:5222",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    "https": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": true,
+      "applicationUrl": "https://localhost:7077;http://localhost:5222",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "swagger",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development",
-        "MONGODB_PASSWORD": "UQArHQaxMG7RG76i",
-        "MONGODB_USERNAME": "feedkitchen",
-        "MONGODB_DATABASE": "FeedKitchen",
-        "MONGODB_SERVER": "feedkitchen.ecsxo.mongodb.net"
-      }
-    },
-    "FeedKitchen.MenuWaiter": {
-      "commandName": "Project",
-      "dotnetRunMessages": "true",
-      "launchBrowser": true,
-      "launchUrl": "swagger",
-      "applicationUrl": "https://localhost:5001",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development",
-        "MONGODB_PASSWORD": "UQArHQaxMG7RG76i",
-        "MONGODB_USERNAME": "feedkitchen",
-        "MONGODB_DATABASE": "FeedKitchen",
-        "MONGODB_SERVER": "feedkitchen.ecsxo.mongodb.net"
+        "ASPNETCORE_ENVIRONMENT": "Development"
       }
     }
   }

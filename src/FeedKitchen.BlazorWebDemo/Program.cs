@@ -1,23 +1,12 @@
-using FeedKitchen.ChefPortal.Components;
-using FeedKitchen.Entities.Models;
-using FeedKitchen.Repositories;
-using Microsoft.EntityFrameworkCore;
+using FeedKitchen.BlazorWebDemo.Components;
 
 var builder = WebApplication.CreateBuilder(args);
-
-builder.AddServiceDefaults();
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
-builder.Services.AddDbContext<FeedKitchenDbContext>(options => options.UseSqlServer("sql"));
-
-builder.Services.AddScoped<RecipeRepository>();
-
 var app = builder.Build();
-
-app.MapDefaultEndpoints();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
