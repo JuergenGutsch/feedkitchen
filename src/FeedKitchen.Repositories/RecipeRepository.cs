@@ -1,72 +1,72 @@
-﻿using FeedKitchen.Shared.Models;
+﻿using FeedKitchen.Entities.Models;
+using FeedKitchen.Shared.Models;
 using Microsoft.Extensions.Logging;
-using Dapper;
-using Microsoft.Data.SqlClient;
 
 namespace FeedKitchen.Repositories
 {
-    public class RecipeRepository : RepositoryBase
+    public class RecipeRepository
     {
+        private readonly FeedKitchenDbContext _dbContext;
         private readonly ILogger<RecipeRepository> _logger;
 
         public RecipeRepository(
-            SqlConnection sqlConnection,
+            FeedKitchenDbContext dbContext,
             ILogger<RecipeRepository> logger)
-            : base(sqlConnection, logger)
         {
+            _dbContext = dbContext;
             _logger = logger;
         }
 
-        public async Task Save(Recipe recipe)
+        public async Task Save(RecipeModel recipe)
         {
             _logger.LogDebug("SaveChanges", recipe);
 
-            var result = await Database.ExecuteAsync("UPDATE recipes SET Title=@Title, Description=@Description, LastUpdate=@LastUpdate WHERE Id=@Id", recipe);
+            //  var result = await Database.ExecuteAsync("UPDATE recipes SET Title=@Title, Description=@Description, LastUpdate=@LastUpdate WHERE Id=@Id", recipe);
 
-            _logger.LogDebug("SaveChanges", result);
+            _logger.LogDebug("SaveChanges", new RecipeModel());
         }
 
-        public async Task<Recipe> Load(int recipeId)
+        public async Task<RecipeModel> Load(int recipeId)
         {
             _logger.LogDebug("Load", recipeId);
 
-            var recipe = await Database.QueryFirstAsync<Recipe>("SELECT Id, Title, Description, LastUpdate FROM recipes WHERE Id=@Id", new { Id = recipeId });
+            //var recipe = await Database.QueryFirstAsync<RecipeModel>("SELECT Id, Title, Description, LastUpdate FROM recipes WHERE Id=@Id", new { Id = recipeId });
 
-            return recipe;
+            return new RecipeModel();
         }
 
-        public async Task<Recipe> Load(string name)
+        public async Task<RecipeModel> Load(string name)
         {
             _logger.LogDebug("Load", name);
 
-            var recipe = await Database.QueryFirstAsync<Recipe>("SELECT Id, Title, Description, LastUpdate FROM recipes WHERE Name=@Name", new { Name = name });
+            // var recipe = await Database.QueryFirstAsync<RecipeModel>("SELECT Id, Title, Description, LastUpdate FROM recipes WHERE Name=@Name", new { Name = name });
 
-            return recipe;
+            return new RecipeModel();
         }
 
-        public async Task<IEnumerable<Recipe>> LoadAllRecipes()
+        public async Task<IEnumerable<RecipeModel>> LoadAllRecipes()
         {
             _logger.LogDebug("LoadActiveRecipes");
 
-            var recipes = await Database.QueryAsync<Recipe>("SELECT Id, Title, Description, LastUpdate FROM recipes ORDER BY LastUpdate DESC");
+            //  var recipes = await Database.QueryAsync<RecipeModel>("SELECT Id, Title, Description, LastUpdate FROM recipes ORDER BY LastUpdate DESC");
 
-            return recipes;
+            return new List<RecipeModel>();
         }
 
-        public async Task AddRecipe(Recipe recipe)
+        public async Task AddRecipe(RecipeModel recipe)
         {
             _logger.LogDebug("AddRecipe", recipe);
 
-            var result = await Database.ExecuteAsync("INSERT INTO recipes (Title, Description, LastUpdate, AuthorId) VALUES (@Title, @Description, @LastUpdate, @AuthorId) ", recipe);
+            //   var result = await Database.ExecuteAsync("INSERT INTO recipes (Title, Description, LastUpdate, AuthorId) VALUES (@Title, @Description, @LastUpdate, @AuthorId) ", recipe);
         }
 
-        public async Task<IEnumerable<Recipe>> LoadActiveRecipes()
+        public async Task<IEnumerable<RecipeModel>> LoadActiveRecipes()
         {
             _logger.LogDebug("LoadActiveRecipes");
 
-            var recipes = await Database.QueryAsync<Recipe>("SELECT Id, Title, Description, LastUpdate FROM recipes ORDER BY LastUpdate DESC");
+            // var recipes = await Database.QueryAsync<RecipeModel>("SELECT Id, Title, Description, LastUpdate FROM recipes ORDER BY LastUpdate DESC");
 
-            return recipes;
+            return new List<RecipeModel>();
         }
     }
 }

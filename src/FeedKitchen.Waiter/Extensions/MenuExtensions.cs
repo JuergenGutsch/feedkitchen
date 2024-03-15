@@ -9,7 +9,7 @@ namespace FeedKitchen.Waiter.Extensions
 {
     public static class MenuExtensions
     {
-        public static async Task<SyndicationFeed> Serve(this Menu menu)
+        public static async Task<SyndicationFeed> Serve(this MenuModel menu)
         {
             var feed = new SyndicationFeed(
                    menu.Title, menu.Description,
@@ -24,7 +24,6 @@ namespace FeedKitchen.Waiter.Extensions
 
                 var syndicationItem = new SyndicationItem(x.Title, x.Content, kitchenUri, link, pubDate)
                 {
-                    Id = x.IngridientId,
                     Summary = new TextSyndicationContent(x.Summary, TextSyndicationContentKind.Plaintext),
                     PublishDate = pubDate
                 };
@@ -42,7 +41,7 @@ namespace FeedKitchen.Waiter.Extensions
             return feed;
         }
 
-        public static Uri SetKitchenUrl(this Fixing ingredient, int menuId)
+        public static Uri SetKitchenUrl(this FixingModel ingredient, long menuId)
         {
             var linkItems = ingredient.Link.Segments;
             var lpathItem = linkItems[linkItems.Length - 1];            

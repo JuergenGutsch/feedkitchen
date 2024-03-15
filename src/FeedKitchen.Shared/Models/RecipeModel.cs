@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace FeedKitchen.Shared.Models
 {
-    public class Recipe
+    public class RecipeModel
     {
         public int Id { get; set; }
         public string? Title { get; set; }
@@ -11,7 +11,8 @@ namespace FeedKitchen.Shared.Models
         public int AuthorId { get; set; }
         public DateTime? LastUpdate { get; set; }
 
-        public Author Author { get; set; } = new Author();
-        public ICollection<Ingredient> Ingredients { get; set; } = new List<Ingredient>();
+        public AuthorModel Author { get; set; } = new AuthorModel();
+        public ICollection<IngredientModel> Ingredients { get; set; } = new List<IngredientModel>();
+        public ICollection<FixingModel> Fixings { get; set; } = new List<FixingModel>();
     }
 }

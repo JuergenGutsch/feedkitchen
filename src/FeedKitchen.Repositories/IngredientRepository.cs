@@ -1,17 +1,18 @@
-﻿using Microsoft.Extensions.Logging;
-using Microsoft.Data.SqlClient;
+﻿using FeedKitchen.Entities.Models;
+using Microsoft.Extensions.Logging;
 
 namespace FeedKitchen.Repositories
 {
-    public class IngredientRepository : RepositoryBase
+    public class IngredientRepository
     {
+        private readonly FeedKitchenDbContext _dbContext;
         private readonly ILogger<IngredientRepository> _logger;
 
         public IngredientRepository(
-            SqlConnection sqlConnection,
+            FeedKitchenDbContext dbContext,
             ILogger<IngredientRepository> logger)
-            : base(sqlConnection, logger)
         {
+            _dbContext = dbContext;
             _logger = logger;
         }
     }

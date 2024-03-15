@@ -18,7 +18,7 @@ namespace FeedKitchen.Waiter.OutputFormatters
 
         protected override bool CanWriteType(Type type)
         {
-            if (typeof(Menu).IsAssignableFrom(type))
+            if (typeof(MenuModel).IsAssignableFrom(type))
             {
                 return base.CanWriteType(type);
             }

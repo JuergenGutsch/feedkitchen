@@ -40,7 +40,7 @@ namespace FeedKitchen.ChefPortal.Pages
             if (ModelState.IsValid)
             {
                 await _recipeRepository.AddRecipe(
-                      new Recipe
+                      new RecipeModel
                       {
                           Title = Title,
                           Description = Description,

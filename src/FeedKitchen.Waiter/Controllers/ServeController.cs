@@ -23,7 +23,7 @@ namespace FeedKitchen.Waiter.Controllers
         }
 
         [HttpGet("{name}")]
-        public async Task<ActionResult<Menu>> Serve(string name)
+        public async Task<ActionResult<MenuModel>> Serve(string name)
         {
             _logger.LogInformation($"Serve '{name}'");
 

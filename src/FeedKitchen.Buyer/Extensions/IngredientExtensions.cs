@@ -5,7 +5,7 @@ namespace FeedKitchen.Buyer.Extensions
 {
     public static class IngredientExtensions
     {
-        public static async Task<IEnumerable<Fixing>> Buy(this Ingredient ingredient, Recipe reipe)
+        public static async Task<IEnumerable<FixingModel>> Buy(this IngredientModel ingredient, RecipeModel reipe)
         {
             var feed = await FeedReader.ReadAsync(ingredient.Url.ToString());
 

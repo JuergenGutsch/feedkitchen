@@ -40,7 +40,7 @@ public class BuyerHostedService : IHostedService, IDisposable
             {
                 foreach (var ingredient in recipe.Ingredients)
                 {
-                    var fixings = await ingredient.Buy();
+                    var fixings = await ingredient.Buy(recipe);
 
                    await _menuRepository.StoreFixings(recipe, fixings);
                 }

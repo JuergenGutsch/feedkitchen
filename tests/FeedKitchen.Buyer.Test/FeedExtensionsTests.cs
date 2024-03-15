@@ -27,9 +27,8 @@ public class FeedExtensionsTests
             Description = "Test Description"
         };
 
-        var expected = new Fixing
+        var expected = new FixingModel
         {
-            IngridientId = feedItem.Id,
             Title = feedItem.Title,
             Link = new Uri(feedItem.Link),
             Author = feedItem.Author,
@@ -40,14 +39,13 @@ public class FeedExtensionsTests
         };
 
         // Act
-        var actual = feedItem.Convert();
+        var actual = feedItem.Convert(0);
 
         // Assert
         
 
         
         actual.Should().BeEquivalentTo(expected);
-        actual.IngridientId.Should().Be(expected.IngridientId);
         actual.Title.Should().Be(expected.Title);
         actual.Link.Should().Be(expected.Link);
         actual.Author.Should().Be(expected.Author);
@@ -88,9 +86,8 @@ public class FeedExtensionsTests
             }
         };
 
-        var expected = feedItems.Select(item => new Fixing
+        var expected = feedItems.Select(item => new FixingModel
         {
-            IngridientId = item.Id,
             Title = item.Title,
             Link = new Uri(item.Link),
             Author = item.Author,
@@ -101,13 +98,12 @@ public class FeedExtensionsTests
         });
 
         // Act
-        var actual = feedItems.Convert();
+        var actual = feedItems.Convert(0);
 
         // Assert
         actual.Count().Should().Be(expected.Count());
         for (int i = 0; i < expected.Count(); i++)
         {
-            actual.ElementAt(i).IngridientId.Should().Be(expected.ElementAt(i).IngridientId);
             actual.ElementAt(i).Title.Should().Be(expected.ElementAt(i).Title);
             actual.ElementAt(i).Link.Should().Be(expected.ElementAt(i).Link);
             actual.ElementAt(i).Author.Should().Be(expected.ElementAt(i).Author);

@@ -12,12 +12,12 @@ namespace FeedKitchen.IngredientsBuyer.Test
         [Fact]
         public async Task LoadAtomTest()
         {
-            var ingredient = new Ingredient
+            var ingredient = new IngredientModel
             {
                 Url = new Uri("http://asp.net-hacker.rocks/atom.xml")
             };
 
-            var fixings = await IngredientExtensions.Buy(ingredient);
+            var fixings = await IngredientExtensions.Buy(ingredient, new RecipeModel { Id = 0 });
 
             fixings.Should().NotBeEmpty();
         }

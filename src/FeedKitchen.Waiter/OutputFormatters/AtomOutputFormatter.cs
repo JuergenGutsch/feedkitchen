@@ -16,7 +16,7 @@ namespace FeedKitchen.Waiter.OutputFormatters
             OutputFormatterWriteContext context,
             Encoding selectedEncoding)
         {
-            var menu = context.Object as Menu;
+            var menu = context.Object as MenuModel;
 
             var response = context.HttpContext.Response;
 

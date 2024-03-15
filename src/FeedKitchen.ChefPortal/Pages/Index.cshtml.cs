@@ -1,9 +1,6 @@
 ﻿using FeedKitchen.Repositories;
 using FeedKitchen.Shared.Models;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Logging;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace FeedKitchen.ChefPortal.Pages
 {
@@ -12,7 +9,7 @@ namespace FeedKitchen.ChefPortal.Pages
         private readonly ILogger<IndexModel> _logger;
         private readonly RecipeRepository _recipeRepository;
 
-        public IEnumerable<Recipe> Recipes { get; private set; }
+        public IEnumerable<RecipeModel> Recipes { get; private set; }
 
         public IndexModel(
             ILogger<IndexModel> logger,
