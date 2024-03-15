@@ -1,13 +1,20 @@
 var builder = DistributedApplication.CreateBuilder(args);
 
-builder.AddProject<Projects.FeedKitchen_ManagerPortal>("FeedKitchen-ManagerPortal");
+var database = builder.AddConnectionString("sql");
 
-builder.AddProject<Projects.FeedKitchen_ChefPortal>("FeedKitchen-ChefPortal");
+builder.AddProject<Projects.FeedKitchen_ManagerPortal>("FeedKitchen-ManagerPortal")
+    .WithReference(database);
 
-builder.AddProject<Projects.FeedKitchen_Doorman>("FeedKitchen-Doorman");
+builder.AddProject<Projects.FeedKitchen_ChefPortal>("FeedKitchen-ChefPortal")
+    .WithReference(database);
 
-builder.AddProject<Projects.FeedKitchen_Waiter>("FeedKitchen-Waiter");
+builder.AddProject<Projects.FeedKitchen_Doorman>("FeedKitchen-Doorman")
+    .WithReference(database);
 
-builder.AddProject<Projects.FeedKitchen_Buyer>("FeedKitchen-Buyer");
+builder.AddProject<Projects.FeedKitchen_Waiter>("FeedKitchen-Waiter")
+    .WithReference(database);
+
+builder.AddProject<Projects.FeedKitchen_Buyer>("FeedKitchen-Buyer")
+    .WithReference(database);
 
 builder.Build().Run();
