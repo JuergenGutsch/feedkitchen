@@ -1,25 +1,24 @@
-using Xunit;
-using System;
 using FeedKitchen.Buyer.Extensions;
 using FeedKitchen.Shared.Models;
-using System.Threading.Tasks;
 using FluentAssertions;
+using System;
+using System.Threading.Tasks;
+using Xunit;
 
-namespace FeedKitchen.IngredientsBuyer.Test
+namespace FeedKitchen.IngredientsBuyer.Test;
+
+public class FeedLoaderTests
 {
-    public class FeedLoaderTests
+    [Fact]
+    public async Task LoadAtomTest()
     {
-        [Fact]
-        public async Task LoadAtomTest()
+        var ingredient = new IngredientModel
         {
-            var ingredient = new IngredientModel
-            {
-                Url = new Uri("http://asp.net-hacker.rocks/atom.xml")
-            };
+            Url = new Uri("http://asp.net-hacker.rocks/atom.xml")
+        };
 
-            var fixings = await IngredientExtensions.Buy(ingredient, new RecipeModel { Id = 0 });
+        var fixings = await IngredientExtensions.Buy(ingredient, new RecipeModel { Id = 0 });
 
-            fixings.Should().NotBeEmpty();
-        }
+        fixings.Should().NotBeEmpty();
     }
 }

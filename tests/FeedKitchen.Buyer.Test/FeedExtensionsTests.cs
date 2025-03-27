@@ -1,11 +1,11 @@
-using Xunit;
-using FeedKitchen.Buyer.Extensions;
 using CodeHollow.FeedReader;
-using System.Collections.Generic;
-using System;
+using FeedKitchen.Buyer.Extensions;
 using FeedKitchen.Shared.Models;
-using System.Linq;
 using FluentAssertions;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using Xunit;
 
 namespace FeedKitchen.Buyer.Tests;
 
@@ -42,9 +42,9 @@ public class FeedExtensionsTests
         var actual = feedItem.Convert(0);
 
         // Assert
-        
 
-        
+
+
         actual.Should().BeEquivalentTo(expected);
         actual.Title.Should().Be(expected.Title);
         actual.Link.Should().Be(expected.Link);

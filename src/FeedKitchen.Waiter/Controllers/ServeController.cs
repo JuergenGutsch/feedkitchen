@@ -1,35 +1,31 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using FeedKitchen.Waiter.Extensions;
-using FeedKitchen.Repositories;
-using System.Threading.Tasks;
+﻿using FeedKitchen.Repositories;
 using FeedKitchen.Shared.Models;
+using Microsoft.AspNetCore.Mvc;
 
-namespace FeedKitchen.Waiter.Controllers
+namespace FeedKitchen.Waiter.Controllers;
+
+[ApiController]
+[Route("[controller]")]
+public class ServeController : ControllerBase
 {
-    [ApiController]
-    [Route("[controller]")]
-    public class ServeController : ControllerBase
+    private readonly ILogger<ServeController> _logger;
+    private readonly MenuRepository _repository;
+
+    public ServeController(
+        ILogger<ServeController> logger,
+        MenuRepository repository)
     {
-        private readonly ILogger<ServeController> _logger;
-        private readonly MenuRepository _repository;
+        _logger = logger;
+        _repository = repository;
+    }
 
-        public ServeController(
-            ILogger<ServeController> logger,
-            MenuRepository repository)
-        {
-            _logger = logger;
-            _repository = repository;
-        }
+    [HttpGet("{name}")]
+    public async Task<ActionResult<MenuModel>> Serve(string name)
+    {
+        _logger.LogInformation($"Serve '{name}'");
 
-        [HttpGet("{name}")]
-        public async Task<ActionResult<MenuModel>> Serve(string name)
-        {
-            _logger.LogInformation($"Serve '{name}'");
+        var menu = await _repository.Serve(name);
 
-            var menu = await _repository.Serve(name);
-
-            return menu;
-        }
+        return menu;
     }
 }

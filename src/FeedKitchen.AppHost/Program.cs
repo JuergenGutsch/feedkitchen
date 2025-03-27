@@ -17,4 +17,4 @@ builder.AddProject<Projects.FeedKitchen_Waiter>("FeedKitchen-Waiter")
 builder.AddProject<Projects.FeedKitchen_Buyer>("FeedKitchen-Buyer")
     .WithReference(database);
 
-builder.Build().Run();
+await builder.Build().RunAsync();

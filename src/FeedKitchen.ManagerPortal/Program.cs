@@ -1,6 +1,3 @@
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication.OpenIdConnect;
-
 var builder = WebApplication.CreateBuilder(args);
 
 builder.AddServiceDefaults();

@@ -1,30 +1,29 @@
-﻿using FeedKitchen.Waiter.Extensions;
-using FeedKitchen.Shared.Models;
+﻿using FeedKitchen.Shared.Models;
+using FeedKitchen.Waiter.Extensions;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using System.Text;
 using System.Xml;
 
-namespace FeedKitchen.Waiter.OutputFormatters
+namespace FeedKitchen.Waiter.OutputFormatters;
+
+public class Atom1OutputFormatter : BaseOutputFormatter
 {
-    public class Atom1OutputFormatter : BaseOutputFormatter
+    public Atom1OutputFormatter()
+        : base("application/atom+xml")
+    { }
+
+    public override async Task WriteResponseBodyAsync(
+        OutputFormatterWriteContext context,
+        Encoding selectedEncoding)
     {
-        public Atom1OutputFormatter()
-            : base("application/atom+xml")
-        { }
+        var menu = context.Object as MenuModel;
 
-        public override async Task WriteResponseBodyAsync(
-            OutputFormatterWriteContext context,
-            Encoding selectedEncoding)
+        var response = context.HttpContext.Response;
+
+        using (var xmlWriter = XmlWriter.Create(response.Body))
         {
-            var menu = context.Object as MenuModel;
-
-            var response = context.HttpContext.Response;
-
-            using (var xmlWriter = XmlWriter.Create(response.Body))
-            {
-                var feed = await menu.Serve();
-                feed.SaveAsAtom10(xmlWriter);
-            }
+            var feed = await menu.Serve();
+            feed.SaveAsAtom10(xmlWriter);
         }
     }
 }
