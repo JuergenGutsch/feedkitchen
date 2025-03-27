@@ -12,6 +12,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".shared", ".shared", "{248404A0-6D53-4CE7-A76A-6E58D88AE6F5}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
+		Directory.Packages.props = Directory.Packages.props
+		global.json = global.json
 		README.md = README.md
 	EndProjectSection
 EndProject
