@@ -15,9 +15,9 @@ public abstract class BaseOutputFormatter : TextOutputFormatter
         SupportedEncodings.Add(Encoding.Unicode);
     }
 
-    protected override bool CanWriteType(Type type)
+    protected override bool CanWriteType(Type? type) // Updated to match nullability of overridden member
     {
-        if (typeof(MenuModel).IsAssignableFrom(type))
+        if (type != null && typeof(MenuModel).IsAssignableFrom(type))
         {
             return base.CanWriteType(type);
         }

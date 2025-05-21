@@ -6,23 +6,15 @@ namespace FeedKitchen.Waiter.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class ServeController : ControllerBase
+public class ServeController(
+    ILogger<ServeController> _logger,
+    MenuRepository _repository)
+    : ControllerBase
 {
-    private readonly ILogger<ServeController> _logger;
-    private readonly MenuRepository _repository;
-
-    public ServeController(
-        ILogger<ServeController> logger,
-        MenuRepository repository)
-    {
-        _logger = logger;
-        _repository = repository;
-    }
-
     [HttpGet("{name}")]
     public async Task<ActionResult<MenuModel>> Serve(string name)
     {
-        _logger.LogInformation($"Serve '{name}'");
+        _logger.LogInformation("Serve '{Name}'", name);
 
         var menu = await _repository.Serve(name);
 

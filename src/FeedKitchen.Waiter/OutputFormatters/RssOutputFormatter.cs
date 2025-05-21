@@ -19,6 +19,12 @@ public class Rss2OutputFormatter : BaseOutputFormatter
     {
         var menu = context.Object as MenuModel;
 
+        if (menu is null)
+        {
+            context.HttpContext.Response.StatusCode = 204; // No Content
+            return;
+        }
+
         var response = context.HttpContext.Response;
 
         using (var xmlWriter = XmlWriter.Create(response.Body))

@@ -1,27 +1,17 @@
-﻿
-using FeedKitchen.Buyer.Extensions;
+﻿using FeedKitchen.Buyer.Extensions;
 using FeedKitchen.Repositories;
 
 namespace FeedKitchen.Buyer;
 
-public class BuyerHostedService : IHostedService, IDisposable
+public class BuyerHostedService(
+    RecipeRepository _recipeRepository,
+    MenuRepository _menuRepository,
+    ILogger<BuyerHostedService> _logger)
+    : IHostedService, IDisposable
 {
-    private readonly RecipeRepository _recipeRepository;
-    private readonly MenuRepository _menuRepository;
-    private readonly ILogger<BuyerHostedService> _logger;
     private Timer? _timer = null;
 
-    public BuyerHostedService(
-        RecipeRepository recipeRepository,
-        MenuRepository menuRepository,
-        ILogger<BuyerHostedService> logger)
-    {
-        _recipeRepository = recipeRepository;
-        _menuRepository = menuRepository;
-        _logger = logger;
-    }
-
-    public async Task StartAsync(CancellationToken stoppingToken)
+    public async Task StartAsync(CancellationToken cancellationToken)
     {
         _logger.LogInformation("Timed Hosted Service running.");
 
@@ -55,7 +45,7 @@ public class BuyerHostedService : IHostedService, IDisposable
         _logger.LogInformation($"Timed Hosted Service ended at: {DateTime.Now}");
     }
 
-    public async Task StopAsync(CancellationToken stoppingToken)
+    public async Task StopAsync(CancellationToken cancellationToken)
     {
         _logger.LogInformation("Timed Hosted Service is stopping.");
 

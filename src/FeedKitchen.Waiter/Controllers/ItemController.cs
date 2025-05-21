@@ -5,25 +5,17 @@ namespace FeedKitchen.Waiter.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class ItemController : ControllerBase
+public class ItemController(
+    ILogger<ItemController> _logger,
+    RecipeRepository _repository)
+    : ControllerBase
 {
-    private readonly ILogger<ServeController> _logger;
-    private readonly RecipeRepository _repository;
-
-    public ItemController(
-        ILogger<ServeController> logger,
-        RecipeRepository repository)
-    {
-        _logger = logger;
-        _repository = repository;
-    }
-
     [HttpGet("{menuId}/{itemId}/{urlPart}")]
     public async Task<ActionResult<object>> Item(int menuId, int itemId, string urlPart)
     {
-        _logger.LogInformation($"Item '{menuId}/{itemId}/{urlPart}'");
+        _logger.LogInformation("Item '{MenuId}/{ItemId}/{UrlPart}'", menuId, itemId, urlPart);
 
-        var link = await LoadLink(menuId, itemId);
+        var link = await LoadLink(menuId, itemId, urlPart);
 
         if (string.IsNullOrWhiteSpace(link))
         {
@@ -35,20 +27,25 @@ public class ItemController : ControllerBase
         }
     }
 
-    private async Task<string> LoadLink(int meniId, int itemId)
+    private async Task<string?> LoadLink(int menuId, int itemId, string urlPart)
     {
-        string link = string.Empty;
+        var recipe = await _repository.Load(menuId);
+        if (recipe is null)
+            return string.Empty;
 
-        var recipe = await _repository.Load(meniId);
-        if (recipe is not null)
-        {
-            var item = recipe.Ingredients.Where(x => x.Id == itemId).FirstOrDefault();
-            if (item is not null)
-            {
-                link = item.Url?.ToString();
-            }
-        }
+        var item = recipe.Ingredients.FirstOrDefault(x => x.Id == itemId);
+        if (item is null)
+            return string.Empty;
 
-        return link;
+        var baseUrl = item.Url?.ToString();
+        if (string.IsNullOrWhiteSpace(baseUrl))
+            return string.Empty;
+
+        if (string.IsNullOrEmpty(urlPart))
+            return baseUrl;
+
+        // Append urlPart as a query string, using '?' or '&' as appropriate
+        var separator = baseUrl.Contains('?') ? "&" : "?";
+        return baseUrl + separator + urlPart;
     }
 }
