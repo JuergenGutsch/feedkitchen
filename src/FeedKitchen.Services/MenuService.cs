@@ -1,7 +1,6 @@
-﻿namespace FeedKitchen.Services
-{
-    public class MenuService
-    {
+﻿namespace FeedKitchen.Services;
 
-    }
+public class MenuService
+{
+
 }

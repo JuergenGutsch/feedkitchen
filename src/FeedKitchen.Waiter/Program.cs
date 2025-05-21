@@ -1,9 +1,9 @@
+using FeedKitchen.Entities.Models;
 using FeedKitchen.Repositories;
 using FeedKitchen.Waiter.OutputFormatters;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
-using Microsoft.Net.Http.Headers;
-using FeedKitchen.Entities.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Net.Http.Headers;
 
 
 var builder = WebApplication.CreateBuilder(args);

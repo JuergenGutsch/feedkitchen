@@ -1,7 +1,6 @@
-namespace FeedKitchen.Shared.Options
+namespace FeedKitchen.Shared.Options;
+
+public class DatabaseOptions
 {
-    public class DatabaseOptions
-    {
-        public string? ConnectionString { get; set; }
-    }
+    public string? ConnectionString { get; set; }
 }

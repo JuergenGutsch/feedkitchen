@@ -1,55 +1,54 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using FeedKitchen.Repositories;
+﻿using FeedKitchen.Repositories;
+using Microsoft.AspNetCore.Mvc;
 
-namespace FeedKitchen.Waiter.Controllers
+namespace FeedKitchen.Waiter.Controllers;
+
+[ApiController]
+[Route("[controller]")]
+public class ItemController : ControllerBase
 {
-    [ApiController]
-    [Route("[controller]")]
-    public class ItemController : ControllerBase
+    private readonly ILogger<ServeController> _logger;
+    private readonly RecipeRepository _repository;
+
+    public ItemController(
+        ILogger<ServeController> logger,
+        RecipeRepository repository)
     {
-        private readonly ILogger<ServeController> _logger;
-        private readonly RecipeRepository _repository;
+        _logger = logger;
+        _repository = repository;
+    }
 
-        public ItemController(
-            ILogger<ServeController> logger,
-            RecipeRepository repository)
+    [HttpGet("{menuId}/{itemId}/{urlPart}")]
+    public async Task<ActionResult<object>> Item(int menuId, int itemId, string urlPart)
+    {
+        _logger.LogInformation($"Item '{menuId}/{itemId}/{urlPart}'");
+
+        var link = await LoadLink(menuId, itemId);
+
+        if (string.IsNullOrWhiteSpace(link))
         {
-            _logger = logger;
-            _repository = repository;
+            return new NotFoundResult();
+        }
+        else
+        {
+            return new RedirectResult(link);
+        }
+    }
+
+    private async Task<string> LoadLink(int meniId, int itemId)
+    {
+        string link = string.Empty;
+
+        var recipe = await _repository.Load(meniId);
+        if (recipe is not null)
+        {
+            var item = recipe.Ingredients.Where(x => x.Id == itemId).FirstOrDefault();
+            if (item is not null)
+            {
+                link = item.Url?.ToString();
+            }
         }
 
-        [HttpGet("{menuId}/{itemId}/{urlPart}")]
-        public async Task<ActionResult<object>> Item(int menuId, int itemId, string urlPart)
-        {
-            _logger.LogInformation($"Item '{menuId}/{itemId}/{urlPart}'");
-
-            var link = await LoadLink(menuId, itemId);
-
-            if (string.IsNullOrWhiteSpace(link))
-            {
-                return new NotFoundResult();
-            }
-            else
-            {
-                return new RedirectResult(link);
-            }
-        }
-
-        private async Task<string> LoadLink(int meniId, int itemId)
-        {
-            string link = string.Empty;
-
-            var recipe = await _repository.Load(meniId);
-            if (recipe is not null)
-            {
-                var item = recipe.Ingredients.Where(x => x.Id == itemId).FirstOrDefault();
-                if (item is not null)
-                {
-                    link = item.Url?.ToString();
-                }
-            }
-
-            return link;
-        }
+        return link;
     }
 }

@@ -42,7 +42,7 @@ public class BuyerHostedService : IHostedService, IDisposable
                 {
                     var fixings = await ingredient.Buy(recipe);
 
-                   await _menuRepository.StoreFixings(recipe, fixings);
+                    await _menuRepository.StoreFixings(recipe, fixings);
                 }
             }
         }
