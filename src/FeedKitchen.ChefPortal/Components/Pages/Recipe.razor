@@ -1,0 +1,75 @@
+@page "/recipe/{id:long}"
+
+@using FeedKitchen.Repositories
+@using FeedKitchen.Shared.Models
+@inject RecipeRepository RecipeRepository
+
+@code {
+    [Parameter]
+    public long id { get; set; }
+
+    private RecipeModel? recipe;
+    private bool loading = true;
+    private bool notFound = false;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        loading = true;
+        notFound = false;
+        recipe = await RecipeRepository.Load(id);
+        loading = false;
+        notFound = recipe is null;
+    }
+}
+
+<PageTitle>Recipe Details</PageTitle>
+
+@if (loading)
+{
+    <p>Loading recipe...</p>
+}
+else if (notFound)
+{
+    <p>Recipe not found.</p>
+}
+else if (recipe is not null)
+{
+    <div class="mb-4">
+        <h2>@recipe.Title</h2>
+        <p><strong>Description:</strong> @recipe.Description</p>
+        <p><strong>Author:</strong> @recipe.Author?.Name (@recipe.Author?.Email)</p>
+        <p><strong>Last Update:</strong> @recipe.LastUpdate</p>
+    </div>
+    <h4>Ingredients</h4>
+    @if (recipe.Ingredients is not null && recipe.Ingredients.Any())
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Title</th>
+                    <th>Url</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var ingredient in recipe.Ingredients)
+                {
+                    <tr>
+                        <td>@ingredient.Id</td>
+                        <td>@ingredient.Title</td>
+                        <td>
+                            @if (ingredient.Url is not null)
+                            {
+                                <a href="@ingredient.Url" target="_blank">@ingredient.Url</a>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>No ingredients found.</p>
+    }
+}

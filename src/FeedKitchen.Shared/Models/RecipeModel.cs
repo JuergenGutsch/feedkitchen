@@ -2,10 +2,10 @@
 
 public class RecipeModel
 {
-    public int Id { get; set; }
+    public long Id { get; set; } // Changed from int to long
     public string? Title { get; set; }
     public string? Description { get; set; }
-    public int AuthorId { get; set; }
+    public long AuthorId { get; set; } // Changed from int to long
     public DateTime? LastUpdate { get; set; }
 
     public AuthorModel Author { get; set; } = new AuthorModel();

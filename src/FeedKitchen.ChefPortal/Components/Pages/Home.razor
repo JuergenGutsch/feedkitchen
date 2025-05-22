@@ -1,6 +1,58 @@
 ﻿@page "/"
 
+@using FeedKitchen.Repositories
+@using FeedKitchen.Shared.Models
+@inject RecipeRepository RecipeRepository
+
 <PageTitle>Chef Portal</PageTitle>
 
 <h1>Welcome to the Chef Portal</h1>
+
+<p>Please find your recipes here:</p>
+
+@if (recipes is null)
+{
+    <p>Loading recipes...</p>
+}
+else if (!recipes.Any())
+{
+    <p>No recipes found.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Last Update</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var recipe in recipes)
+            {
+                <tr>
+                    <td>
+                        <NavLink class="nav-link" href="@($"/recipe/{recipe.Id}")">@recipe.Id</NavLink>
+                    </td>
+                    <td>
+                        <NavLink class="nav-link" href="@($"/recipe/{recipe.Id}")">@recipe.Title</NavLink>
+                    </td>
+                    <td>@recipe.Description</td>
+                    <td>@recipe.LastUpdate</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private IEnumerable<RecipeModel>? recipes;
+
+    protected override async Task OnInitializedAsync()
+    {
+        recipes = await RecipeRepository.LoadActiveRecipes();
+    }
+}
 
