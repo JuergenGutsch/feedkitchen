@@ -1,53 +1,37 @@
+using FeedKitchen.Entities.Models;
+using Microsoft.EntityFrameworkCore;
+using FeedKitchen.ManagerPortal.Components;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.AddServiceDefaults();
 
-//builder.Services.AddAuthentication(options =>
-//{
-//    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-//    options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
-//})
-//    .AddCookie()
-//    .AddOpenIdConnect(options =>
-//    {
-//        options.SignInScheme = "Cookies";
-//        options.Authority = "https://localhost:5000";
-//        options.RequireHttpsMetadata = true;
-//        options.ClientId = "manager_portal_client";
-//        options.ClientSecret = "manager_portal_client_secret";
-//        options.ResponseType = "code";
-//        options.UsePkce = true;
-//        options.Scope.Add("profile");
-//        options.Scope.Add("offline_access");
-//        options.SaveTokens = true;
-//    });
+// Add services to the container.
+builder.Services.AddRazorComponents()
+    .AddInteractiveServerComponents();
 
-builder.Services.AddAuthorization();
-builder.Services.AddRazorPages();
+builder.Services.AddDbContext<FeedKitchenDbContext>(options => options.UseSqlServer("sql"));
 
 var app = builder.Build();
 
 app.MapDefaultEndpoints();
 
-if (app.Environment.IsDevelopment())
+// Configure the HTTP request pipeline.
+if (!app.Environment.IsDevelopment())
 {
-    app.UseDeveloperExceptionPage();
-}
-else
-{
-    app.UseExceptionHandler("/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+    app.UseExceptionHandler("/Error", createScopeForErrors: true);
     app.UseHsts();
 }
 
 app.UseHttpsRedirection();
-app.UseStaticFiles();
 
-app.UseRouting();
+app.UseStaticFiles();
+app.UseAntiforgery();
 
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapRazorPages();
+app.MapRazorComponents<App>()
+    .AddInteractiveServerRenderMode();
 
 app.Run();
